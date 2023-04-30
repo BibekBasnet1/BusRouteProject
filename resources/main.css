@@ -12,7 +12,7 @@ body {
 
 #container {
     min-height: 100vh;
-    border: 2px solid black;
+    /*border: 2px solid black;*/
 }
 
 :root {
@@ -30,7 +30,6 @@ ul.nav-links {
     display: flex;
     margin-left: 2rem;
     flex-wrap: wrap;
-
 }
 
 .li-link {
@@ -422,5 +421,207 @@ ul{
     }
 }
 
-
 /* end of the footer section */
+
+/*for the sign in code*/
+
+.form-container{
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+    display: none;
+}
+
+form{
+    height: 520px;
+    width: 400px;
+    /*background-color: var(--secondary-color);*/
+    background-color : #e0e0e0;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.2);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
+
+}
+#username{
+    background-color: var(--third-color);
+}
+
+form *{
+    /*color: #ffffff;*/
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+    color: var(--secondary-color);
+}
+form h3{
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+}
+
+label{
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+input{
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: var(--third-color);
+    border-radius: 3px;
+    /*border: 2px solid var(--secondary-color);*/
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+::placeholder{
+    color: var(--secondary-color);
+}
+button.Login-button{
+    margin-top: 50px;
+    width: 100%;
+    background-color: var(--primary-color);
+    color: var(--third-color);
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.social{
+    margin-top: 30px;
+    display: flex;
+}
+.social div{
+    background: red;
+    width: 150px;
+    border-radius: 3px;
+    padding: 5px 10px 10px 5px;
+    background-color: rgba(255,255,255,0.27);
+    color: #eaf0fb;
+    text-align: center;
+}
+.social div:hover{
+    background-color: rgba(255,255,255,0.47);
+}
+.social .fb{
+    margin-left: 25px;
+}
+.social i{
+    margin-right: 4px;
+}
+
+/* end of the sign in code*/
+
+/* start of the sign up code */
+
+/* center sign up container */
+.sign-up-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    visibility: hidden;
+}
+.title-signUP h2{
+    margin-bottom: 2em;
+}
+
+/* style form container */
+.form-form {
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 20px;
+    display: none;
+}
+
+/* style title */
+.title-signUP h2 {
+    text-align: center;
+    color: #333;
+    border-bottom: #611BF5;
+}
+
+/* style form content */
+.form-content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 50%;
+}
+
+/* style input fields */
+form input[type="text"],
+form input[type="number"],
+form input[type="email"]
+{
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+}
+
+.content-1,.content-2,.content-3{
+    display: flex;
+}
+
+/* style submit button */
+.btn button[type="submit"] {
+    display: block;
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #611bf5;
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn button[type="submit"]:hover{
+    background-color: #4e25a7da;
+}
+
+form input[type="text"]:focus,
+form input[type="number"]:focus ,
+form input[type="email"]:focus
+{
+    /*border-color: #611BF5;*/
+    outline: none;
+}
+
+/* style labels */
+label {
+    /* font-weight: bold; */
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* style individual input fields */
+.name-input,
+.parent-input,
+.phone-input,
+.relationship-input,
+.person_email,
+.roll-input {
+    min-width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* start of the sign up code */

@@ -6,7 +6,7 @@
                 <h2 class="des innovate">Choose Your Location, We'll do Rest</h2>
                 <br>
                 <button id="learn_More">
-                    <a href="#">LearnMore</a>
+                    <a href="#">Learn More</a>
                 </button>
             </div>
         </div>
