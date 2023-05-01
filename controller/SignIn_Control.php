@@ -1,6 +1,7 @@
 <?php
+require_once('sign_database_query.php');
 
-class SignIn_Control
+class SignIn_Control extends sign_database_query
 {
     private $name;
     private $parents_name;
@@ -8,14 +9,49 @@ class SignIn_Control
     private $relationship;
     private $email;
     private $roll_id;
+    private $parent_no;
+    private $address;
 
-    public function __construct($name,$parents_name,$phone_no,$relationship,$email,$roll_id){
+    public function __construct($name,$parents_name,$phone_no,$relationship,$email,$roll_id,$parent_no,$address){
         $this->name = $name;
         $this->email = $email;
         $this->parents_name = $parents_name;
         $this->relationship = $relationship;
         $this->phone_no = $phone_no;
         $this->roll_id = $roll_id;
+        $this->parent_no = $parent_no;
+        $this->address = $address;
+    }
+
+    // for all the validation
+    public function signUpUser(): void
+    {
+        // this is to help if the input user has given is empty
+        if(!$this->emptyInput()){
+            header("Location: ../views/index.php?error=emptyInput");
+//            echo "empty Input";
+//            var_dump($this->email,$this->address,$this->relationship,$this->name,$this->phone_no,$this->parents_name,$this->roll_id,$this->parent_no);
+            exit();
+        }
+
+        // this is to help if the email user has given is invalid
+        if(!$this->checkInvalidEmail()){
+            header("Location: ../views/index.php?error=invalidEmail");
+            exit();
+        }
+        // this is to check if the username,parent's name,relationship is in proper format i.e all should be in string
+        if(!$this->checkValidUser()){
+            header("Location: ../views/index.php?error=invalidUser");
+            exit();
+        }
+        // this is to check if the user that has given roll no the user has given is in integer format
+        if(!$this->checkValidRollNo()){
+            header("Location: ../views/index.php?error=invalidRollNo");
+            exit();
+        }
+
+        $this->setUpUser($this->name,$this->parents_name,$this->phone_no,$this->relationship,$this->email,$this->roll_id,$this->parent_no,
+            $this->address);
     }
 
     // this helps to check for the empty field if the user has given some empty input
@@ -24,12 +60,13 @@ class SignIn_Control
         // initially setting up the result as null to check whether the input is valid or not
         $result = null;
         if(empty($this->name) || empty($this->parents_name) || empty($this->phone_no) || empty($this->relationship)
-            || empty($this->email) || empty($this->roll_id))
+            || empty($this->email) || empty($this->roll_id) || empty($this->address) || empty($this->parent_no))
         {
             $result = false;
         }else{
             $result = true;
         }
+
         return $result;
     }
 

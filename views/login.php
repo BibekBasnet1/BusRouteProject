@@ -1,6 +1,6 @@
 
 <div class="form-container">
-    <form>
+    <form method="POST" action="" >
         <h3 style="color: black;">Sign In</h3>
 
         <label for="username">Username</label>

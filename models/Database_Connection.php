@@ -8,7 +8,7 @@ class Database_Connection
 {
     protected function db_connection(){
         try {
-            $servername = "localhost";
+//            $servername = "localhost";
             $username = "bus_route_project_admin";
             $password = "ruby";
 //            $db_name = "bus_route";

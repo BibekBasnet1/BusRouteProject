@@ -128,7 +128,7 @@ a.anchor-nav-links {
     display: flex;
     /* border: 2px solid purple; */
     min-height: 50vh;
-    padding: 2rem 0rem 2rem 0rem;
+    padding: 2rem 0 2rem 0;
     flex-wrap: wrap;
     justify-content: space-around;
     position: relative;
@@ -383,7 +383,7 @@ ul{
     color: #ffffff;
     text-decoration: none;
     font-weight: 300;
-    color: #bbbbbb;
+    /*color: #bbbbbb;*/
     display: block;
     transition: all 0.3s ease;
 }
@@ -506,11 +506,10 @@ button.Login-button{
     display: flex;
 }
 .social div{
-    background: red;
     width: 150px;
     border-radius: 3px;
     padding: 5px 10px 10px 5px;
-    background-color: rgba(255,255,255,0.27);
+    background: rgba(255, 255, 255, 0.27);
     color: #eaf0fb;
     text-align: center;
 }
@@ -533,7 +532,7 @@ button.Login-button{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     visibility: hidden;
 }
 .title-signUP h2{
@@ -545,6 +544,7 @@ button.Login-button{
     background-color: #ffffff;
     border-radius: 5px;
     padding: 20px;
+    min-height: 100vh;
     display: none;
 }
 
@@ -576,8 +576,9 @@ form input[type="email"]
     border: 2px solid #e0e0e0;
 }
 
-.content-1,.content-2,.content-3{
+.content-1,.content-2,.content-3,.content-4{
     display: flex;
+    /*flex-direction: column;*/
 }
 
 /* style submit button */
@@ -618,7 +619,10 @@ label {
 .phone-input,
 .relationship-input,
 .person_email,
-.roll-input {
+.roll-input ,
+.location-student,
+.parent-no
+{
     min-width: 100%;
     padding: 10px;
     box-sizing: border-box;

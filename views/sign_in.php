@@ -1,5 +1,5 @@
 <!--<div class="sign-up-container">-->
-    <form action="" method="post" class="form-form">
+    <form action="../controller/signIn.inc.php" method="POST" class="form-form">
         <div class="title-signUP">
             <h2>Sign Up</h2>
         </div>
@@ -42,6 +42,16 @@
                 <div class="roll-input">
                     <!-- <label for="roll_no">Roll No</label> -->
                     <input type="text" name="roll_no" id="" placeholder="Your Roll no">
+                </div>
+            </div>
+            <div class="content-4">
+                <!-- this is for the location of the student  -->
+                <div class="location-student">
+                    <input type="text" name="location" id="location" placeholder="Your Address" required>
+                </div>
+                <!--  this is for the parents no -->
+                <div class="parent-no">
+                    <input type="number" name="parent_no" placeholder="Parent's Number" id="parent_no"required>
                 </div>
             </div>
 
