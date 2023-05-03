@@ -47,12 +47,12 @@ class Login_Database_Query extends \models\Database_Connection
         }
 
         $_SESSION["roll_id"] = $user[0]["roll_id"];
-        $_SESSION["email"] = $user[0]["email"];
-        $_SESSION["name"] = $user[0]["name"];
-        $_SESSION["lat"] = $user[0]["latitude"];
-        $_SESSION["long"] = $user[0]["longitude"];
-        $_SESSION["address"] = $user[0]["address"];
-        $_SESSION["phone_no"] = $user[0]["phone_no"];
+//        $_SESSION["email"] = $user[0]["email"];
+//        $_SESSION["name"] = $user[0]["name"];
+//        $_SESSION["lat"] = $user[0]["latitude"];
+//        $_SESSION["long"] = $user[0]["longitude"];
+//        $_SESSION["address"] = $user[0]["address"];
+//        $_SESSION["phone_no"] = $user[0]["phone_no"];
         $stmt = null;
     }
 }
