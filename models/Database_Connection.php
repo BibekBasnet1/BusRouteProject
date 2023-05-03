@@ -6,7 +6,7 @@ use PDOException;
 
 class Database_Connection
 {
-    protected function db_connection(){
+    public function db_connection(){
         try {
 //            $servername = "localhost";
             $username = "bus_route_project_admin";
