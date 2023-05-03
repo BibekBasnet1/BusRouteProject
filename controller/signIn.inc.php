@@ -1,5 +1,5 @@
 <?php
-//require_once "../views/sign_in.php";
+
 if(isset($_POST["submit"])){
 
     // this is to take the data from the form
@@ -26,6 +26,7 @@ if(isset($_POST["submit"])){
     // after all the validation it will finally sign up the user in the database
     $signup->signUpUser();
     // if the signUp is successfull redirect the user to redirect on the new page
-    header("location: ../views/index.php");
+    header("location: ../views/dashboard.php");
+
 
 }

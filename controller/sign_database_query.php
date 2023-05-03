@@ -1,10 +1,19 @@
 <?php
-require_once('/var/www/html/busRouteProject/models/Database_Connection.php');
+include_once ("../models/Database_Connection.php");
 
 class sign_database_query extends \models\Database_Connection {
 
+    /**
+     * @throws Exception
+     */
     protected function setUpUser($name, $parents_name, $phone_no, $relationship, $email, $roll_id, $parent_no, $address): void
     {
+        if (!$this->checkUserInDatabase($email, $roll_id)) {
+            // user already exists
+            header("Location: ../views/index.php?error=UserExist");
+            exit();
+        }
+
         $stmt = $this->db_connection()->prepare("INSERT INTO STUDENT (name, parents_name, phone_no, relationship, email, roll_id, parent_no, address) 
     VALUES(:name, :parents_name, :phone_no, :relationship, :email, :roll_id, :parent_no, :address)");
         if(!$stmt->execute([
