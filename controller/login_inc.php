@@ -14,7 +14,7 @@ if(isset($_POST['Login'])){
     $login = new Login_Controller($email,$roll_id);
     $login->LoginUser();
 
-    header("Location: ../views/dashboard.php");
-//    exit();
+
+
 }
 

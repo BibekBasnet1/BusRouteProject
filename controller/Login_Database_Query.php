@@ -7,53 +7,70 @@ require_once "../models/Database_Connection.php";
 class Login_Database_Query extends \models\Database_Connection
 {
 
-//    private string $query = "SELECT roll_id, email FROM STUDENT WHERE email = ? OR roll_id = ?;";
-
     public function getUser($email, $roll_id): void
     {
         // Check if user exists in the database
-        $stmt = $this->db_connection()->prepare("select * from STUDENT where email = ? or roll_id = ?");
+        $query = $this->db_connection()->prepare("
+            select roll_id,user_type from STUDENT WHERE email = ? or roll_id = ?
+            UNION
+            SELECT staff_id,user_type from ADMIN where email = ? or staff_id = ? 
+        ");
 
         // if executing the statement fails
-        if(!$stmt->execute(array($email,$roll_id))){
-            $stmt = null;
+        if (!$query->execute([$email, $roll_id, $email, $roll_id])) {
+            $query = null;
             header("Location: ../views/index.php?error=stmtFailed");
             exit();
         }
 
         // if there is no row with the value of the user
-        if($stmt->rowCount() == 0){
-            $stmt = null;
+        if ($query->rowCount() == 0) {
+            $query = null;
             header("Location: ../views/index.php?error=userNotFound");
             exit();
         }
 
         // fetches the data in associative array
-        $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
-//        var_dump($user);
-//        echo $user;
-        if(empty($user[0]["roll_id"])){
-            $stmt = null;
-            header("Location: ../views/index.php?error=WrongPassword");
-            exit();
-        }
-//        print_r($user[0]["roll_id"]);
+        $user = $query->fetchAll(PDO::FETCH_ASSOC);
 
-        // this compares the password with the roll_id from the database and user_input
-        if(($user[0]["roll_id"]) !== $roll_id){
-            $stmt = null;
-            header("Location: ../views/index.php?error=WrongPasswordHash");
-            exit();
-        }
 
-        $_SESSION["roll_id"] = $user[0]["roll_id"];
-//        $_SESSION["email"] = $user[0]["email"];
-//        $_SESSION["name"] = $user[0]["name"];
-//        $_SESSION["lat"] = $user[0]["latitude"];
-//        $_SESSION["long"] = $user[0]["longitude"];
-//        $_SESSION["address"] = $user[0]["address"];
-//        $_SESSION["phone_no"] = $user[0]["phone_no"];
-        $stmt = null;
+        // check if the user type is student or admin
+        if ($user[0]["user_type"] == "student") {
+            // check if the entered roll_id matches the roll_id in the database
+            if ($user[0]["roll_id"] == $roll_id) {
+                $_SESSION["roll_id"] = $roll_id;
+                $_SESSION["user_type"] = "student";
+                header("Location: ../views/dashboard.php");
+                exit();
+            } else {
+                $query = null;
+                header("Location: ../views/index.php?error=WrongPassword");
+                exit();
+            }
+        } elseif ($user[0]["user_type"] == "admin") {
+        // check if the entered roll_id matches the staff_id in the database
+            if ($user[0]["staff_id"] == $roll_id) {
+                $_SESSION["roll_id"] = $roll_id;
+                $_SESSION["user_type"] = "admin";
+                header("Location: ../views/admin_dashboard.php");
+                exit();
+            } elseif ($user[0]["roll_id"] == $roll_id) {
+                $_SESSION["roll_id"] = $roll_id;
+                $_SESSION["user_type"] = "admin_student";
+                header("Location: ../views/admin_dashboard.php");
+                exit();
+            } else {
+                $query = null;
+                header("Location: ../views/index.php?error=WrongPassword");
+                exit();
+            }
+        } else {
+        $query = null;
+        header("Location: ../views/index.php?error=WrongPassword");
+        exit();
+    }
+
+//        $query = null;
     }
 }
 
