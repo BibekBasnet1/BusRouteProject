@@ -20,11 +20,10 @@ if (isset($_SESSION["roll_id"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- My CSS -->
-    <link rel="stylesheet" href="../resources/dash.css">
+    <link rel="stylesheet" href="../resources/dashboard.css">
 
     <title>Admin</title>
     <style>
@@ -113,10 +112,10 @@ if (isset($_SESSION["roll_id"])) {
     <nav>
         <i class='bx bx-menu' ></i>
         <a href="#" class="nav-link">Categories</a>
-        <form action="#">
+        <form action="../controller/search.php" method="POST">
             <div class="form-input">
-                <input type="search" placeholder="Search...">
-                <button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+                <input type="search" name="search" placeholder="Search...">
+                <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
             </div>
         </form>
         <input type="checkbox" id="switch-mode" hidden>
@@ -176,64 +175,10 @@ if (isset($_SESSION["roll_id"])) {
             </li>
         </ul>
 
+        <?php
+            include_once  "../controller/search.php";
+        ?>
 
-        <div class="table-data">
-            <div class="order">
-                <div class="head">
-                    <h3>Recent Orders</h3>
-                    <i class='bx bx-search' ></i>
-                    <i class='bx bx-filter' ></i>
-                </div>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Address</th>
-                        <th>Latitude</th>
-                        <th>Longitude</th>
-                        <th>Phone no</th>
-                        <th>Bus</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    require_once "../models/Database_Connection.php";
-                    $db_connection = new \models\Database_Connection();
-                    $stmt = $db_connection->db_connection()->prepare("SELECT * FROM STUDENT;");
-                    $stmt->execute();
-                    while($result = $stmt->fetch(PDO::FETCH_ASSOC)){ ?>
-                        <tr>
-                            <td>
-                                <img src="img/people.png">
-                                <p><?php echo $result['name']; ?></p>
-                            </td>
-                            <td>
-                                <?php echo $result['email']; ?>
-                            </td>
-                            <td>
-                                <?php echo $result["address"]; ?>
-                            </td>
-                            <td>
-                                <?php echo $result["latitude"]; ?>
-                            </td>
-                            <td>
-                                <?php echo $result["longitude"]; ?>
-                            </td>
-                            <td>
-                                <?php echo $result["phone_no"]; ?>
-                            </td>
-                            <td>
-                                <?php
-                                    echo $result["bus"];
-                                ?>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
     </main>
     <!-- MAIN -->
 </section>

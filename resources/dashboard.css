@@ -196,6 +196,8 @@ body {
     border-radius: 50%;
     box-shadow: -20px -20px 0 var(--light);
 }
+
+
 #content nav a {
     color: var(--dark);
 }

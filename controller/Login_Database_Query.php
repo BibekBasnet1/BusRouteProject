@@ -11,9 +11,9 @@ class Login_Database_Query extends \models\Database_Connection
     {
         // Check if user exists in the database
         $query = $this->db_connection()->prepare("
-            select roll_id,user_type from STUDENT WHERE email = ? or roll_id = ?
+            select roll_id,user_type from STUDENT WHERE email = ? and roll_id = ?
             UNION
-            SELECT staff_id,user_type from ADMIN where email = ? or staff_id = ? 
+            SELECT staff_id,user_type from ADMIN where email = ? and staff_id = ? 
         ");
 
         // if executing the statement fails
@@ -37,7 +37,7 @@ class Login_Database_Query extends \models\Database_Connection
         // check if the user type is student or admin
         if ($user[0]["user_type"] == "student") {
             // check if the entered roll_id matches the roll_id in the database
-            if ($user[0]["roll_id"] == $roll_id) {
+            if ($user[0]["roll_id"] == $roll_id ) {
                 $_SESSION["roll_id"] = $roll_id;
                 $_SESSION["user_type"] = "student";
                 header("Location: ../views/dashboard.php");
@@ -49,7 +49,7 @@ class Login_Database_Query extends \models\Database_Connection
             }
         } elseif ($user[0]["user_type"] == "admin") {
         // check if the entered roll_id matches the staff_id in the database
-            if ($user[0]["staff_id"] == $roll_id) {
+            if ($user[0]["staff_id"] == $roll_id ) {
                 $_SESSION["roll_id"] = $roll_id;
                 $_SESSION["user_type"] = "admin";
                 header("Location: ../views/admin_dashboard.php");
@@ -73,4 +73,3 @@ class Login_Database_Query extends \models\Database_Connection
 //        $query = null;
     }
 }
-
