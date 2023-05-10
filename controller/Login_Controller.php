@@ -4,7 +4,6 @@ require_once "Login_Database_Query.php";
 
 class Login_Controller extends Login_Database_Query
 {
-
     private $email;
     private $roll_id;
 

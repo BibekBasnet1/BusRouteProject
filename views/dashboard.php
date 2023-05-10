@@ -6,10 +6,7 @@ session_start();
 if (isset($_SESSION["roll_id"])) {
     // get the roll_id value from the session variable
     $roll_id = $_SESSION["roll_id"];
-//    $name = $_SESSION["name"];
-//    $address = $_SESSION["address"];
-//    $lat = $_SESSION["latitude"];
-//    $lon = $_SESSION["longitude"];
+
 } else {
     // if roll_id session variable is not set, redirect to login page
     header("Location: ../views/index.php");
@@ -28,7 +25,25 @@ if (isset($_SESSION["roll_id"])) {
     <!-- My CSS -->
     <link rel="stylesheet" href="../resources/dashboard.css">
 
-    <title>Admin</title>
+    <title>
+        <?php
+            echo $_SESSION["roll_id"];
+        ?>
+    </title>
+    <style>
+        #sidebar .side-menu li a{
+            width: 100%;
+            height: 100%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            border-radius: 48px;
+            font-size: 16px;
+            color: var(--dark);
+            white-space: nowrap;
+            overflow-x: hidden;
+        }
+    </style>
 </head>
 <body>
 
@@ -197,6 +212,6 @@ if (isset($_SESSION["roll_id"])) {
 </section>
 <!-- CONTENT -->
 
-<script src="../resources/dashboard_code.js"></script>
+<script src="../resources/dash_code.js"></script>
 </body>
 </html>
