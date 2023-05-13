@@ -2,17 +2,22 @@
 
 //require "../models/Database_Connection.php";
 session_start();
+
 require_once "../models/Database_Connection.php";
+
 // check if roll_id session variable is set
 if (isset($_SESSION["roll_id"])) {
     // get the roll_id value from the session variable
     $roll_id = $_SESSION["roll_id"];
+
+//    $name = $_SESSION["name"];
 
 } else {
     // if roll_id session variable is not set, redirect to login page
     header("Location: ../views/index.php");
     exit();
 }
+
 $db = new \models\Database_Connection();
 
 // count students for bus 1
@@ -29,6 +34,8 @@ $count2 = $stmt2->fetchColumn();
 $stmt3 = $db->db_connection()->prepare("SELECT COUNT(*) FROM STUDENT WHERE bus='3'");
 $stmt3->execute();
 $count3 = $stmt3->fetchColumn();
+
+
 
 ?>
 <!DOCTYPE html>
@@ -157,27 +164,44 @@ $count3 = $stmt3->fetchColumn();
                 </ul>
             </div>
 
+
+
+            <a href="#" class="btn-download">
+                <i class='bx bxs-cloud-download'></i>
+                <span class="text">Download PDF</span>
+            </a>
+
         </div>
 
         <ul class="box-info">
             <li>
                 <i class='bx bxs-calendar-check'></i>
                 <span class="text">
+
                     <?php
                         echo "<h3>$count1</h3>";
                     ?>
+
+<!-- 						<h3>1020</h3> -->
+
 						<p>Bus 1</p>
 					</span>
             </li>
             <li>
                 <i class='bx bxs-group' ></i>
                 <span class="text">
+
                     <?php
                     echo "<h3>$count2</h3>";
                     ?>
 
                     <p>Bus 2</p>
                 </span>
+
+						<h3>2834</h3>
+						<p>Bus 2</p>
+					</span>
+
             </li>
             <li>
                 <i class='bx bxs-dollar-circle' ></i>
@@ -186,6 +210,8 @@ $count3 = $stmt3->fetchColumn();
                             <?php
                             echo "<h3>$count3</h3>";
                             ?>
+
+<!-- 						<h3>$2543</h3> -->
 
 						<p>Bus 3</p>
                 </span>

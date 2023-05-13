@@ -29,8 +29,6 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <th>Address</th>
                 <th>Lat</th>
                 <th>Long</th>
-                <th>Phone no</th>
-                <th>Bus</th>
             </tr>
             </thead>
             <tbody>
