@@ -35,7 +35,7 @@ class sign_database_query extends \models\Database_Connection {
 
     protected function checkUserInDatabase($email,$roll_id): bool
     {
-        $stmt = $this->db_connection()->prepare("SELECT name FROM STUDENT WHERE email = ? OR roll_id = ?");
+        $stmt = $this->db_connection()->prepare("SELECT name FROM STUDENT WHERE email = ? and roll_id = ?");
         if(!$stmt->execute([$email, $roll_id])){
             $stmt  = null;
             header("location: ../views/index.php?error=stm-failed");
