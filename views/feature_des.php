@@ -29,7 +29,7 @@
         <div class="grid-child child-5">
             <figure>
                 <div class="img-container-sign-up">
-                    <img src="/images/web-3120321_640.png" alt="">
+                    <img src="../images/web-3120321_640.png" alt="">
                 </div>
 
                 <!--                            <figcaption class="dashboard-caption"><span>3</span><h2>Get your Location in latitude and longitude</h2></figcaption>-->

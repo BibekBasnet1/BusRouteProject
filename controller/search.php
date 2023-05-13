@@ -27,10 +27,8 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <th>Name</th>
                 <th>Email</th>
                 <th>Address</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
-                <th>Phone no</th>
-                <th>Bus</th>
+                <th>Lat</th>
+                <th>Long</th>
             </tr>
             </thead>
             <tbody>
