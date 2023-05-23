@@ -12,13 +12,13 @@
                         <a href="#home-section" class="anchor-nav-links">Home</a>
                     </li>
                     <li class="li-link">
-                        <a href="#" class="anchor-nav-links">About</a>
+                        <a href="#about" class="anchor-nav-links">About</a>
                     </li>
                     <li class="li-link">
-                        <a href="#" class="anchor-nav-links">Features</a>
+                        <a href="#Features"" class="anchor-nav-links">Features</a>
                     </li>
                     <li class="li-link">
-                        <a href="#" class="anchor-nav-links">Contact</a>
+                        <a href="#contact" class="anchor-nav-links">Contact</a>
                     </li>
                     <!-- <li class="li-link">F</li> -->
                 </ul>

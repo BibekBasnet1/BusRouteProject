@@ -95,11 +95,14 @@ if (isset($_POST['delete_id'])) {
         $deleteLocationsStmt->bindValue(':id', $deleteId);
         $deleteLocationsStmt->execute();
 
+        // Refresh the page after a short delay
+//        header("Location: ../views/admin_dashboard.php");
+//        exit();
 
         // Perform any other actions or redirection after deletion if needed
     } else {
         // Handle the case where the user type is "admin" and deletion is not allowed
         // Display an error message or perform other actions as needed
-        echo "Cannot delete an admin student.";
+        header("Location: ../views/admin_dashboard.php?error=cannotRemoveAdmin");
     }
 }
