@@ -399,9 +399,27 @@ body {
     color: var(--dark);
 }
 
-
-
-
+/* for the edit and delete button*/
+.delete-btn{
+    font-size: 1rem;
+    padding: 0.5em 1em;
+    border: transparent;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    background: var(--orange);
+    color: white;
+    border-radius: 4px;
+}
+.edit-button
+{
+    font-size: 1rem;
+    padding: 0.5em 1em;
+    border: transparent;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    background: var(--blue);
+    color: white;
+    border-radius: 4px;
+}
+/* end of the edit and delete button */
 
 #content main .table-data {
     display: flex;

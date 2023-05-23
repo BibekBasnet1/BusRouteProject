@@ -14,8 +14,8 @@ class sign_database_query extends \models\Database_Connection {
             exit();
         }
 
-        $stmt = $this->db_connection()->prepare("INSERT INTO STUDENT (name, parents_name, phone_no, relationship, email, roll_id, parent_no, address) 
-    VALUES(:name, :parents_name, :phone_no, :relationship, :email, :roll_id, :parent_no, :address)");
+        $stmt = $this->db_connection()->prepare("INSERT INTO STUDENT (name, parents_name, phone_no, relationship, email, roll_id, parent_no, address,user_type) 
+    VALUES(:name, :parents_name, :phone_no, :relationship, :email, :roll_id, :parent_no, :address,'student')");
         if(!$stmt->execute([
             ':name' => $name,
             ':parents_name' => $parents_name,
@@ -24,7 +24,8 @@ class sign_database_query extends \models\Database_Connection {
             ':email' => $email,
             ':roll_id' => $roll_id,
             ':parent_no' => $parent_no,
-            ':address' => $address
+            ':address' => $address,
+
         ])){
 //            throw new Exception("Failed to set up user");
             header("Location: ../views/index.php/error=UserSetUpFailed");

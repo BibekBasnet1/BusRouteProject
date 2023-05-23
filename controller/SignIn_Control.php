@@ -21,9 +21,14 @@ class SignIn_Control extends sign_database_query
         $this->roll_id = $roll_id;
         $this->parent_no = $parent_no;
         $this->address = $address;
+
     }
 
     // for all the validation
+
+    /**
+     * @throws Exception
+     */
     public function signUpUser(): void
     {
         // this is to help if the input user has given is empty
@@ -52,6 +57,28 @@ class SignIn_Control extends sign_database_query
 
         $this->setUpUser($this->name,$this->parents_name,$this->phone_no,$this->relationship,$this->email,$this->roll_id,$this->parent_no,
             $this->address);
+    }
+
+    public function updateLocationId($address): void
+    {
+        $locationId = $this->getLocationIdByAddress($address);
+
+        $sql = "UPDATE STUDENT SET location_id = :locationId WHERE address = :address";
+        $stmt = $this->db_connection()->prepare($sql);
+        $stmt->bindParam(':locationId', $locationId);
+        $stmt->bindParam(':address', $address);
+        $stmt->execute();
+    }
+
+    private function getLocationIdByAddress($address)
+    {
+        $sql = "SELECT location_id FROM LOCATIONS WHERE location_name = :address";
+        $stmt = $this->db_connection()->prepare($sql);
+        $stmt->bindParam(':address', $address);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return ($result !== false) ? $result['location_id'] : null;
     }
 
     // this helps to check for the empty field if the user has given some empty input

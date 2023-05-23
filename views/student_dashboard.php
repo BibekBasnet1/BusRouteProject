@@ -18,23 +18,6 @@ if (isset($_SESSION["roll_id"])) {
     exit();
 }
 
-$db = new \models\Database_Connection();
-
-// count students for bus 1
-$stmt1 = $db->db_connection()->prepare("SELECT COUNT(*) FROM STUDENT WHERE bus='1'");
-$stmt1->execute();
-$count1 = $stmt1->fetchColumn();
-
-// count students for bus 2
-$stmt2 = $db->db_connection()->prepare("SELECT COUNT(*) FROM STUDENT WHERE bus='2'");
-$stmt2->execute();
-$count2 = $stmt2->fetchColumn();
-
-// count students for bus 3
-$stmt3 = $db->db_connection()->prepare("SELECT COUNT(*) FROM STUDENT WHERE bus='3'");
-$stmt3->execute();
-$count3 = $stmt3->fetchColumn();
-
 
 ?>
 <!DOCTYPE html>
@@ -85,13 +68,13 @@ $count3 = $stmt3->fetchColumn();
             </a>
         </li>
         <li>
-            <a href="student_dashboard.php">
+            <a href="#">
                 <i class='bx bxs-shopping-bag-alt' ></i>
                 <span class="text">Student</span>
             </a>
         </li>
         <li>
-            <a href="driver_dashboard.php">
+            <a href="#">
                 <i class='bx bxs-doughnut-chart' ></i>
                 <span class="text">Driver</span>
             </a>
@@ -113,10 +96,10 @@ $count3 = $stmt3->fetchColumn();
         </li>
         <li>
 
-                <a href="../controller/Logout.php" class="logout">
-                    <i class='bx bxs-log-out-circle' ></i>
-                    <span class="text">Logout</span>
-                </a>
+            <a href="../controller/Logout.php" class="logout">
+                <i class='bx bxs-log-out-circle' ></i>
+                <span class="text">Logout</span>
+            </a>
         </li>
 
     </ul>
@@ -178,7 +161,7 @@ $count3 = $stmt3->fetchColumn();
                 <span class="text">
 
                     <?php
-                        echo "<h3>$count1</h3>";
+                    echo "<h3>$count1</h3>";
                     ?>
 
 <!-- 						<h3>1020</h3> -->
@@ -214,7 +197,7 @@ $count3 = $stmt3->fetchColumn();
         </ul>
 
         <?php
-            include_once  "../controller/search.php";
+        include_once  "../controller/search.php";
         ?>
 
     </main>
