@@ -28,7 +28,7 @@ if (isset($_SESSION["roll_id"])) {
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- My CSS -->
-    <link rel="stylesheet" href="../resources/dash.css">
+    <link rel="stylesheet" href="../resources/dashboard.css">
 
     <title>Admin</title>
     <style>
@@ -112,7 +112,7 @@ if (isset($_SESSION["roll_id"])) {
     <nav>
         <i class='bx bx-menu' ></i>
         <a href="#" class="nav-link">Categories</a>
-        <form action="../controller/search.php" method="POST">
+        <form action="../controller/Update_Search.php" method="POST">
             <div class="form-input">
                 <input type="search" name="search" placeholder="Search...">
                 <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
@@ -197,7 +197,7 @@ if (isset($_SESSION["roll_id"])) {
         </ul>
 
         <?php
-        include_once  "../controller/search.php";
+        include_once "../controller/Update_Search.php";
         ?>
 
     </main>

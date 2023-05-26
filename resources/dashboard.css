@@ -157,8 +157,15 @@ body {
 
 
 
+/* for the visibility of the form*/
+.update-form{
+    display: none;
+}
+.form-container{
+    visibility: hidden;
+}
 
-
+/* end of the form container */
 /* CONTENT */
 #content {
     position: relative;
@@ -409,7 +416,7 @@ body {
     color: white;
     border-radius: 4px;
 }
-.edit-button
+.edit-btn
 {
     font-size: 1rem;
     padding: 0.5em 1em;
@@ -533,13 +540,6 @@ body {
 /* CONTENT */
 
 
-
-
-
-
-
-
-
 @media screen and (max-width: 768px) {
     #sidebar {
         width: 200px;
@@ -604,3 +604,116 @@ body {
         min-width: 420px;
     }
 }
+/* for the form container */
+
+/* center sign up container */
+.sign-up-container {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999; /* Adjust the z-index as needed */
+}
+.title-signUP h2{
+    margin-bottom: 2em;
+}
+
+/* style form container */
+.form-form {
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 20px;
+    width: 50%;
+    max-width: 400px; /* Adjust the width as needed */
+    margin: auto;
+}
+
+/* style title */
+.title-signUP h2 {
+    text-align: center;
+    color: #333;
+    border-bottom: #611BF5;
+}
+
+/* style form content */
+.form-content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 50%;
+}
+
+/* style input fields */
+form input[type="text"],
+form input[type="number"],
+form input[type="email"]
+{
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+}
+
+.content-1,.content-2,.content-3,.content-4{
+    display: flex;
+    /*flex-direction: column;*/
+}
+
+/* style submit button */
+.btn button[type="submit"] {
+    display: block;
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #611bf5;
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn button[type="submit"]:hover{
+    background-color: #4e25a7da;
+}
+
+form input[type="text"]:focus,
+form input[type="number"]:focus ,
+form input[type="email"]:focus
+{
+    /*border-color: #611BF5;*/
+    outline: none;
+}
+
+/* style labels */
+label {
+    /* font-weight: bold; */
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* style individual input fields */
+.name-input,
+.parent-input,
+.phone-input,
+.relationship-input,
+.person_email,
+.roll-input ,
+.location-student,
+.parent-no
+{
+    min-width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+svg {
+    top: -77px;
+    position: relative;
+}
+/* start of the sign up code */

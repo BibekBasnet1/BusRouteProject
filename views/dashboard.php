@@ -23,7 +23,7 @@ if (isset($_SESSION["roll_id"])) {
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- My CSS -->
-    <link rel="stylesheet" href="../resources/dash.css">
+    <link rel="stylesheet" href="../resources/dashboard.css">
 
     <title>
         <?php

@@ -45,7 +45,7 @@ $count3 = $stmt3->fetchColumn();
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- My CSS -->
-    <link rel="stylesheet" href="../resources/dash.css">
+    <link rel="stylesheet" href="../resources/dashboard.css">
 
     <title>Admin</title>
     <style>
@@ -85,7 +85,7 @@ $count3 = $stmt3->fetchColumn();
             </a>
         </li>
         <li>
-            <a href="student_dashboard.php">
+            <a href="#student_dashboard.php">
                 <i class='bx bxs-shopping-bag-alt' ></i>
                 <span class="text">Student</span>
             </a>
@@ -129,7 +129,7 @@ $count3 = $stmt3->fetchColumn();
     <nav>
         <i class='bx bx-menu' ></i>
         <a href="#" class="nav-link">Categories</a>
-        <form action="../controller/search.php" method="POST">
+        <form action="../controller/Update_Search.php" method="POST">
             <div class="form-input">
                 <input type="search" name="search" placeholder="Search...">
                 <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
@@ -146,15 +146,14 @@ $count3 = $stmt3->fetchColumn();
         </a>
     </nav>
     <!-- NAVBAR -->
-
     <!-- MAIN -->
     <main>
         <div class="head-title">
             <div class="left">
-                <h1>Dashboard</h1>
+                <h1></h1>
                 <ul class="breadcrumb">
                     <li>
-                        <a href="#">Dashboard</a>
+                        <a href="#">Admin Dashboard</a>
                     </li>
                     <li><i class='bx bx-chevron-right'></i></li>
                     <li>
@@ -164,13 +163,9 @@ $count3 = $stmt3->fetchColumn();
             </div>
 
 
-
-            <a href="#" class="btn-download">
-                <i class='bx bxs-cloud-download'></i>
-                <span class="text">Download PDF</span>
-            </a>
-
         </div>
+
+
 
         <ul class="box-info">
             <li>
@@ -213,8 +208,13 @@ $count3 = $stmt3->fetchColumn();
             </li>
         </ul>
 
+        <!-- this is for the form container      -->
         <?php
-            include_once  "../controller/search.php";
+            include_once "update_form.php";
+        ?>
+        <!--  this is the end of the form container -->
+        <?php
+            include_once "../controller/Update_Search.php";
         ?>
 
     </main>

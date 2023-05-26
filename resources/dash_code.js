@@ -69,3 +69,4 @@ switchMode.addEventListener('change', function () {
     }
 })
 
+// for the visibility of the form
