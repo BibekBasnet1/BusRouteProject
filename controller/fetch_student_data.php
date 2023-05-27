@@ -2,6 +2,7 @@
 require_once "../models/Database_Connection.php";
 $db_connection = new \models\Database_Connection();
 
+// this is to fetch the data based on the update button clicked
 if (isset($_GET['rollId'])) {
     $roll_id = $_GET['rollId'];
 

@@ -639,3 +639,8 @@ label {
 }
 
 /* start of the sign up code */
+
+svg {
+    top: -77px;
+    position: relative;
+}

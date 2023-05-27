@@ -66,15 +66,13 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <?php
                         $rollId = $result['roll_id'];
                         ?>
-<!--                        <button type="button" class="edit-btn" data-rollid="--><?php //echo $rollId; ?><!--">Update</button>-->
+
                         <button type="button" class="edit-btn" data-rollid="<?php echo $rollId; ?>" data-usertype="<?php echo $result['user_type']; ?>">Update</button>
 
                     </td>
 
                     <td>
-                        <form action="On_delete_record.php" method="post" onsubmit="return confirm('Are you sure you want to delete this student?')">
-                            <button type="submit" class="delete-btn" name="delete_id" value="<?php echo $result['roll_id']; ?>">Delete</button>
-                        </form>
+                            <button type="submit" class="delete-btn" name="delete_id" data-rollid="<?php echo $result['roll_id']; ?>" data-usertype="<?php echo $result['user_type']; ?>">Delete</button>
                     </td>
                 </tr>
             <?php } ?>
@@ -83,8 +81,8 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </div>
 <script>
-    // for the javascript functionality
 
+    // to prefill the form based on the update button clicked and send the request to the server
     let formElement = document.querySelector(".sign-up-container");
     let updateBtns = document.querySelectorAll(".edit-btn");
     let tableData = document.querySelector(".table-data");
@@ -151,6 +149,60 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             xhr.send();
         });
     });
+
+    // end of the form prefilling logic
+
+    // start of the deleting the row logic
+
+    let deleteBtns = document.querySelectorAll(".delete-btn");
+
+    deleteBtns.forEach(function(deleteBtn) {
+        deleteBtn.addEventListener("click", function() {
+            let rollId = deleteBtn.getAttribute("data-rollid");
+
+            // Get the user type from the data attribute
+            let userType = deleteBtn.getAttribute("data-usertype");
+
+            // Check if the user type is "admin" and disable the update functionality
+            if (userType === "admin") {
+                console.log("Update functionality disabled for admin");
+                return;
+            }
+
+            // Display a confirmation dialog
+            let confirmDelete = confirm("Are you sure you want to delete this student?");
+
+            // Create an AJAX request to delete the record
+            if(confirmDelete) {
+
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "../controller/On_delete_record.php", true);
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+                // Handle the response
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        let response = JSON.parse(xhr.responseText);
+                        if (response.status === "success") {
+                            // Remove the deleted row from the table
+                            deleteBtn.closest("tr").remove();
+                            console.log(response.message);
+                        } else {
+                            console.error(response.message);
+                        }
+                    } else {
+                        console.error("Error: " + xhr.status);
+                    }
+                };
+
+
+                // Send the request with the delete ID
+                xhr.send("delete_id=" + rollId);
+            }
+        });
+    });
+
+    // end of the delete row logic
 
     let wrongBtn = document.querySelector(".wrong-image");
     wrongBtn.addEventListener("click", function() {
