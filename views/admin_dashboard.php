@@ -79,21 +79,21 @@ $count3 = $stmt3->fetchColumn();
     </a>
     <ul class="side-menu top">
         <li class="active">
-            <a href="#">
+            <a href="admin_dashboard.php">
                 <i class='bx bxs-dashboard' ></i>
                 <span class="text">Dashboard</span>
             </a>
         </li>
         <li>
-            <a href="#student_dashboard.php">
+            <a href="student_dashboard.php">
                 <i class='bx bxs-shopping-bag-alt' ></i>
                 <span class="text">Student</span>
             </a>
         </li>
         <li>
-            <a href="driver_dashboard.php">
+            <a href="location_dashboard.php">
                 <i class='bx bxs-doughnut-chart' ></i>
-                <span class="text">Driver</span>
+                <span class="text">Location</span>
             </a>
         </li>
         <li>
