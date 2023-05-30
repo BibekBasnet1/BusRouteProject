@@ -57,6 +57,9 @@ class SignIn_Control extends sign_database_query
 
         $this->setUpUser($this->name,$this->parents_name,$this->phone_no,$this->relationship,$this->email,$this->roll_id,$this->parent_no,
             $this->address);
+
+
+
     }
 
     public function updateLocationId($address): void
@@ -80,6 +83,19 @@ class SignIn_Control extends sign_database_query
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return ($result !== false) ? $result['location_id'] : null;
     }
+
+    public function assignBusToStudent(): void
+    {
+        $sql = "UPDATE STUDENT s
+            INNER JOIN LOCATIONS l ON s.location_id = l.location_id AND s.address = l.location_name
+            INNER JOIN ROUTES r ON l.route_id = r.route_id
+            INNER JOIN bus b ON r.bus_id = b.bus_id
+            SET s.bus = b.bus_num";
+
+        $stmt = $this->db_connection()->prepare($sql);
+        $stmt->execute();
+    }
+
 
     // this helps to check for the empty field if the user has given some empty input
     private function emptyInput(): bool

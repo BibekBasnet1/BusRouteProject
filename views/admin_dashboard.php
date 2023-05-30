@@ -210,7 +210,7 @@ $count3 = $stmt3->fetchColumn();
 
         <!-- this is for the form container      -->
         <?php
-            include_once "update_form.php";
+            include_once "updated_form.php";
         ?>
         <!--  this is the end of the form container -->
         <?php

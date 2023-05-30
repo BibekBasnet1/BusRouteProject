@@ -8,7 +8,7 @@ if (isset($_POST["submit"])) {
     $student_email = $_POST['student_email'];
     $roll_no = $_POST['roll_no'];
     $parent_no = $_POST['parent_no'];
-    $address = $_POST['location'];
+    $address = strtolower($_POST['location']);
 
     // Include necessary files
     include "../models/Database_Connection.php";
@@ -25,12 +25,10 @@ if (isset($_POST["submit"])) {
 
         // Update the location_id in the Student table based on matching address
         $signup->updateLocationId($address);
-
+        $signup->assignBusToStudent();
         // Display a success message
         header("Location: ../views/index.php");
 
-        // Clear the form fields if needed
-        // ...
 
     } catch (Exception $e) {
         // If an exception occurs during the sign-up process, display an error message

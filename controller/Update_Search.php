@@ -1,6 +1,6 @@
 <?php
 require_once "../models/Database_Connection.php";
-require_once "../views/update_form.php";
+require_once "../views/updated_form.php";
 $db_connection = new \models\Database_Connection();
 
 if(isset($_POST['search'])){
@@ -209,5 +209,11 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         formElement.style.display = "none";
         tableData.style.filter = "none";
     });
+
+    // sending the request to update_student_data.php file using post request with the help of ajax
+
+
+
+
 
 </script>
