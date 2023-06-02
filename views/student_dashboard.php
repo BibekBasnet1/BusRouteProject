@@ -62,7 +62,7 @@ if (isset($_SESSION["roll_id"])) {
     </a>
     <ul class="side-menu top">
         <li class="active">
-            <a href="#">
+            <a href="admin_dashboard.php">
                 <i class='bx bxs-dashboard' ></i>
                 <span class="text">Dashboard</span>
             </a>
@@ -74,9 +74,9 @@ if (isset($_SESSION["roll_id"])) {
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="location_dashboard.php">
                 <i class='bx bxs-doughnut-chart' ></i>
-                <span class="text">Driver</span>
+                <span class="text">Locations</span>
             </a>
         </li>
         <li>
@@ -134,7 +134,7 @@ if (isset($_SESSION["roll_id"])) {
     <main>
         <div class="head-title">
             <div class="left">
-                <h1>Dashboard</h1>
+                <h1></h1>
                 <ul class="breadcrumb">
                     <li>
                         <a href="#">Dashboard</a>
@@ -147,54 +147,7 @@ if (isset($_SESSION["roll_id"])) {
             </div>
 
 
-
-            <a href="#" class="btn-download">
-                <i class='bx bxs-cloud-download'></i>
-                <span class="text">Download PDF</span>
-            </a>
-
         </div>
-
-        <ul class="box-info">
-            <li>
-                <i class='bx bxs-calendar-check'></i>
-                <span class="text">
-
-                    <?php
-                    echo "<h3>$count1</h3>";
-                    ?>
-
-<!-- 						<h3>1020</h3> -->
-
-						<p>Bus 1</p>
-					</span>
-            </li>
-            <li>
-                <i class='bx bxs-group' ></i>
-                <span class="text">
-
-                    <?php
-                    echo "<h3>$count2</h3>";
-                    ?>
-
-                    <p>Bus 2</p>
-                </span>
-
-            </li>
-            <li>
-                <i class='bx bxs-dollar-circle' ></i>
-                <span class="text">
-
-                            <?php
-                            echo "<h3>$count3</h3>";
-                            ?>
-
-<!-- 						<h3>$2543</h3> -->
-
-						<p>Bus 3</p>
-                </span>
-            </li>
-        </ul>
 
         <?php
         include_once "../controller/Update_Search.php";
