@@ -31,19 +31,21 @@ margin: 1rem;
 <br>
 <div class="whole-container">
 <div class="container">
-   <img src="./images/admin_dashboard_dark.png" width="500px">
-   <img src="./images/admin_dashboard_light.png" width="500px" alt="">
+   <center><img src="./images/admin_dashboard_dark.png" width="500px"><center>
+     <center><img src="./images/admin_dashboard_light.png" width="500px" alt=""></center>
 </div>
 <br>
 <div class="container">
-   <img src="./images/frontend_pickup.png" width="500px">
-   <img src="./images/dark-frontend.png" width="500px" alt="">
+  <center><img src="./images/frontend_pickup.png" width="500px"></center>
+  <center><img src="./images/dark-frontend.png" width="500px" alt=""></center>
 </div>
 <br>
 <div class="container">
-   <img src="./images/login.png" >
+  <center><img src="./images/login.png" ></center>
 </div>
 <div class="container">
+  <center>
    <img src="./images/update_details.png" >
+  </center>
 </div>
 </div>
