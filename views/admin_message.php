@@ -62,6 +62,56 @@ $count3 = $stmt3->fetchColumn();
             overflow-x: hidden;
         }
 
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        textarea#message{
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #611BF5;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4f1db6;
+        }
 
     </style>
 </head>
@@ -115,10 +165,10 @@ $count3 = $stmt3->fetchColumn();
         </li>
         <li>
 
-                <a href="../controller/Logout.php" class="logout">
-                    <i class='bx bxs-log-out-circle' ></i>
-                    <span class="text">Logout</span>
-                </a>
+            <a href="../controller/Logout.php" class="logout">
+                <i class='bx bxs-log-out-circle' ></i>
+                <span class="text">Logout</span>
+            </a>
         </li>
 
     </ul>
@@ -153,66 +203,24 @@ $count3 = $stmt3->fetchColumn();
         <div class="head-title">
             <div class="left">
                 <h1></h1>
-                <ul class="breadcrumb">
-                    <li>
-                        <a href="#">Admin Dashboard</a>
-                    </li>
-                    <li><i class='bx bx-chevron-right'></i></li>
-                    <li>
-                        <a class="active" href="#">Home</a>
-                    </li>
-                </ul>
             </div>
         </div>
-        <ul class="box-info">
-            <li>
-                <i class='bx bxs-calendar-check'></i>
-                <span class="text">
 
-                    <?php
-                        echo "<h3>$count1</h3>";
-                    ?>
+        <div class="container">
+            <h1>Send a Message</h1>
+            <form id="messageForm" method="post">
+                <label for="recipient">Recipient</label>
+                <input type="text" id="recipient" name="recipient" placeholder="Enter recipient name">
 
-<!-- 						<h3>1020</h3> -->
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" placeholder="Enter message subject">
 
-						<p>Bus 1</p>
-					</span>
-            </li>
-            <li>
-                <i class='bx bxs-group' ></i>
-                <span class="text">
+                <label for="content">Content</label>
+                <textarea id="message" placeholder="Enter message content" name="message"></textarea>
 
-                    <?php
-                    echo "<h3>$count2</h3>";
-                    ?>
-
-                    <p>Bus 2</p>
-                </span>
-
-            </li>
-            <li>
-                <i class='bx bxs-dollar-circle' ></i>
-                <span class="text">
-
-                            <?php
-                            echo "<h3>$count3</h3>";
-                            ?>
-
-<!-- 						<h3>$2543</h3> -->
-
-						<p>Bus 3</p>
-                </span>
-            </li>
-        </ul>
-
-        <!-- this is for the form container      -->
-        <?php
-            include_once "updated_form.php";
-        ?>
-        <!--  this is the end of the form container -->
-        <?php
-            include_once "../controller/Update_Search.php";
-        ?>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
 
     </main>
     <!-- MAIN -->
@@ -220,5 +228,52 @@ $count3 = $stmt3->fetchColumn();
 <!-- CONTENT -->
 
 <script src="../resources/dash_code.js"></script>
+<script>
+    document.getElementById('messageForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Retrieve form data
+        var recipient = document.getElementById('recipient').value;
+        var subject = document.getElementById('subject').value;
+        var content = document.getElementById('message').value;
+        console.log(content);
+        // Validate form data
+
+        // Prepare form data for sending
+        var formData = new FormData();
+        formData.append('recipient', recipient);
+        formData.append('subject', subject);
+        formData.append('content', content);
+
+        // Perform AJAX request to send message
+        fetch('../controller/send_message.php', {
+            method: 'POST',
+            body: formData
+        })
+            .then(function(response) {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Error: ' + response.status);
+                }
+            })
+            .then(function(data) {
+                // Handle successful response
+                if (data.status === 'success') {
+                    // Clear form fields or show success message
+                    document.getElementById('messageForm').reset();
+                    alert('Message sent successfully!');
+                } else {
+                    // Show error message
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(function(error) {
+                // Show error message
+                alert(error.message);
+            });
+    });
+
+</script>
 </body>
 </html>

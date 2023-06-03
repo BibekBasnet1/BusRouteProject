@@ -160,7 +160,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="admin_message.php">
                 <i class='bx bxs-message-dots' ></i>
                 <span class="text">Message</span>
             </a>

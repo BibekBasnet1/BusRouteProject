@@ -1,16 +1,11 @@
 <?php
-
 //require "../models/Database_Connection.php";
 session_start();
-
-require_once "../models/Database_Connection.php";
 
 // check if roll_id session variable is set
 if (isset($_SESSION["roll_id"])) {
     // get the roll_id value from the session variable
     $roll_id = $_SESSION["roll_id"];
-
-//    $name = $_SESSION["name"];
 
 } else {
     // if roll_id session variable is not set, redirect to login page
@@ -18,19 +13,23 @@ if (isset($_SESSION["roll_id"])) {
     exit();
 }
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- My CSS -->
     <link rel="stylesheet" href="../resources/dashboard.css">
 
-    <title>Admin</title>
+    <title>
+        <?php
+        echo $_SESSION["roll_id"];
+        ?>
+    </title>
     <style>
         #sidebar .side-menu li a{
             width: 100%;
@@ -62,30 +61,17 @@ if (isset($_SESSION["roll_id"])) {
     </a>
     <ul class="side-menu top">
         <li class="active">
-            <a href="admin_dashboard.php">
+            <a href="dashboard.php">
                 <i class='bx bxs-dashboard' ></i>
                 <span class="text">Dashboard</span>
             </a>
         </li>
         <li>
-            <a href="#">
-                <i class='bx bxs-shopping-bag-alt' ></i>
-                <span class="text">Student</span>
+            <a href="messageStudent_dashboard.php">
+                <i class='bx bxs-message-dots'></i>
+                <span class="text">message</span>
             </a>
         </li>
-        <li>
-            <a href="location_dashboard.php">
-                <i class='bx bxs-doughnut-chart' ></i>
-                <span class="text">Locations</span>
-            </a>
-        </li>
-        <li>
-            <a href="admin_message.php">
-                <i class='bx bxs-message-dots' ></i>
-                <span class="text">Message</span>
-            </a>
-        </li>
-
     </ul>
     <ul class="side-menu">
         <li>
@@ -112,10 +98,10 @@ if (isset($_SESSION["roll_id"])) {
     <nav>
         <i class='bx bx-menu' ></i>
         <a href="#" class="nav-link">Categories</a>
-        <form action="../controller/Update_Search.php" method="POST">
+        <form action="#">
             <div class="form-input">
-                <input type="search" name="search" placeholder="Search...">
-                <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+                <input type="search" placeholder="Search...">
+                <button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
             </div>
         </form>
         <input type="checkbox" id="switch-mode" hidden>
@@ -134,25 +120,91 @@ if (isset($_SESSION["roll_id"])) {
     <main>
         <div class="head-title">
             <div class="left">
-                <h1></h1>
+                <h1>Dashboard</h1>
                 <ul class="breadcrumb">
                     <li>
                         <a href="#">Dashboard</a>
                     </li>
-                    <li><i class='bx bx-chevron-right'></i></li>
+                    <li><i class='bx bx-chevron-right' ></i></li>
                     <li>
                         <a class="active" href="#">Home</a>
                     </li>
                 </ul>
             </div>
-
-
         </div>
 
-        <?php
-        include_once "../controller/Update_Search.php";
-        ?>
+        <div class="table-data">
+            <div class="order">
+                <div class="head">
+                    <h3>Recent Orders</h3>
+                    <i class='bx bx-search' ></i>
+                    <i class='bx bx-filter' ></i>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Sender_id</th>
+                        <th>Receiver</th>
+                        <th>subject</th>
+                        <th>content</th>
+                        <th>Send At</th>
+                    </tr>
+                    </thead>
 
+                    <!-- ... Rest of the code ... -->
+
+                    <tbody>
+                    <?php
+                    require_once "../models/Database_Connection.php";
+                    $db_connection = new \models\Database_Connection();
+
+                    $stmt = $db_connection->db_connection()->prepare("SELECT * from messages m inner join STUDENT
+                                                                                      s on m.recipient_id = s.roll_id where recipient_id = ?");
+
+                    $stmt->execute([$_SESSION['roll_id']]);
+                    $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    foreach ($messages as $message) {
+                        ?>
+                            <tr>
+                        <td>
+                            <p>
+                                <?php  echo $message['sender_id']?>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <?php  echo $message['name']?>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <?php  echo $message['subject']?>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <?php  echo $message['content']?>
+                            </p>
+                        </td>
+
+                        <td>
+                            <p>
+                                <?php  echo $message['created_at']?>
+                            </p>
+                        </td>
+                            </tr>
+                    <?php
+                    }
+                    ?>
+                    </tbody>
+
+                    <!-- ... Rest of the code ... -->
+
+                </table>
+            </div>
+
+        </div>
     </main>
     <!-- MAIN -->
 </section>

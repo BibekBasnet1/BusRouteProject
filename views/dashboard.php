@@ -61,12 +61,19 @@ if (isset($_SESSION["roll_id"])) {
     </a>
     <ul class="side-menu top">
         <li class="active">
-            <a href="#">
+            <a href="dashboard.php">
                 <i class='bx bxs-dashboard' ></i>
                 <span class="text">Dashboard</span>
             </a>
+
         </li>
+
         <li>
+            <a href="messageStudent_dashboard.php">
+                <i class='bx bxs-message-dots'></i>
+                <span class="text">message</span>
+            </a>
+        </li>
     </ul>
     <ul class="side-menu">
         <li>
