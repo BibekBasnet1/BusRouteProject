@@ -18,12 +18,18 @@ Some of the feature project contains
    .container{
    display: flex;
    justify-content: center;
+align-items: center;
+}
+.whole-container{
+display: grid;
+place-items: center;
 }
 img{
 margin: 1rem;
 }
 </style>                                           <h2><center>Some Images Of Project</center></h2>
 <br>
+<div class="whole-container">
 <div class="container">
    <img src="./images/admin_dashboard_dark.png" width="500px">
    <img src="./images/admin_dashboard_light.png" width="500px" alt="">
@@ -39,4 +45,5 @@ margin: 1rem;
 </div>
 <div class="container">
    <img src="./images/update_details.png" >
+</div>
 </div>
