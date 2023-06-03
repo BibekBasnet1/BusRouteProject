@@ -1,4 +1,4 @@
-                                                       <h2> BusPickUpProject </h2>
+                                                       BusPickUpProject 
             
 Some of the feature project contains
 
@@ -17,6 +17,7 @@ Some of the feature project contains
 <style>
    .container{
    display: flex;
+   justify-content: center;
 }
 img{
 margin: 1rem;
