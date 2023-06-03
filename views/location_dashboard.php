@@ -233,7 +233,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <h3>Locations</h3>
 <!--                    <i class="bx bx-search"></i>-->
                     <i class='bx bx-plus-circle add-location'></i>
-                    <i class='bx bx-filter' ></i>
+                    <i class='bx bx-filter' id="sort-icon" ></i>
                 </div>
                 <table>
                     <thead>
@@ -383,6 +383,19 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             xhr.send(params);
         }
     }
+
+    document.getElementById("sort-icon").addEventListener("click", function() {
+        // Send AJAX request
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", "../controller/sort_locations.php", true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Update the table with the sorted data
+                document.getElementById("location-table").innerHTML = xhr.responseText;
+            }
+        };
+        xhr.send();
+    });
 
 
 </script>

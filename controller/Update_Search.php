@@ -14,13 +14,21 @@ if(isset($_POST['search'])){
 $stmt->execute();
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
+<style>
+    #searchInput{
+        border: 1px solid var(--dark-grey);
+        padding: 5px 5px 5px 5px;
+        border-radius: 5px;
+    }
+</style>
 <div class="table-data">
     <div class="order">
         <div class="head">
             <h3>Student Details</h3>
-            <i class="bx bx-search"></i>
+            <input type="text" id="searchInput" placeholder="Search...">
+            <i class="bx bx-search search-icon"></i>
             <i class='bx bx-filter' ></i>
+
         </div>
         <table>
             <thead>
@@ -36,7 +44,13 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </thead>
             <tbody>
             <?php
-            foreach($results as $result){ ?>
+            foreach($results as $result){
+                // Check if latitude is null and display an empty string instead
+                $latitude = $result["latitude"] ?? "";
+
+                // Check if longitude is null and display an empty string instead
+                $longitude = $result["longitude"] ?? "";
+                ?>
                 <tr>
                     <td>
                         <img src="img/people.png">
@@ -49,10 +63,11 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <?php echo $result["address"]; ?>
                     </td>
                     <td>
-                        <?php echo $result["latitude"]; ?>
+                        <?php echo $latitude;
+                        ?>
                     </td>
                     <td>
-                        <?php echo $result["longitude"]; ?>
+                        <?php echo $longitude; ?>
                     </td>
                     <td>
                         <?php echo $result["phone_no"]; ?>
@@ -210,9 +225,51 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         tableData.style.filter = "none";
     });
 
-    // sending the request to update_student_data.php file using post request with the help of ajax
+    // searching the input
+    document.querySelector('.search-icon').addEventListener('click', function() {
+        var searchInput = document.getElementById('searchInput').value;
 
+        // Create an AJAX request to fetch the filtered student data
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../controller/searchstudents.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
+        // Handle the response
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.status === 'success') {
+                    var filteredData = response.data;
+
+                    // Update the table with the filtered data
+                    var tableBody = document.querySelector('tbody');
+                    tableBody.innerHTML = '';
+
+                    for (var i = 0; i < filteredData.length; i++) {
+                        var row = filteredData[i];
+                        var newRow = '<tr>' +
+                            '<td><img src="img/people.png"><p>' + row.name + '</p></td>' +
+                            '<td>' + row.address + '</td>' +
+                            '<td>' + row.latitude + '</td>' +
+                            '<td>' + row.longitude + '</td>' +
+                            '<td>' + row.phone_no + '</td>' +
+                            '<td>' + row.bus + '</td>' +
+                            // Add the update and delete buttons here
+                            '</tr>';
+
+                        tableBody.innerHTML += newRow;
+                    }
+                } else {
+                    console.error(response.message);
+                }
+            } else {
+                console.error('Error: ' + xhr.status);
+            }
+        };
+
+        // Send the request with the search term
+        xhr.send('search=' + searchInput);
+    });
 
 
 
