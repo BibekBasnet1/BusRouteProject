@@ -13,21 +13,8 @@ Some of the feature project contains
 7. When the admin changes the address the bus no will be changed based on the address and route it is being assigned to 
 8. Dashboard has dark-mode functionality which can be easier to see the details
 9. Roll_id can be seen on the top of the dashboard who is currently being signed in 
-
-<style>
-   .container{
-   display: flex;
-   justify-content: center;
-align-items: center;
-}
-.whole-container{
-display: grid;
-place-items: center;
-}
-img{
-margin: 1rem;
-}
-</style>                                           <h2><center>Some Images Of Project</center></h2>
+10. Admin can send the message with the recipient name on it 
+                                   <h2><center>Some Images Of Project</center></h2>
 <br>
 <div class="whole-container">
 <div class="container">
