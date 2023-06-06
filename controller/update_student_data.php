@@ -1,7 +1,11 @@
 <?php
-require_once "../models/Database_Connection.php";
 
+require_once "../models/Database_Connection.php";
 $db_connection = new \models\Database_Connection();
+
+session_start();
+
+// ... (existing code)
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Get the updated data from the request
@@ -42,10 +46,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt->bindParam(':phoneNo', $phoneNo);
         $stmt->bindParam(':relationship', $relationship);
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':address', $address); // Corrected binding for the address field
+        $stmt->bindParam(':address', $address);
         $stmt->bindParam(':parentNo', $parentNo);
         $stmt->execute();
-
 
         // Update the location_id in the STUDENT table based on the address
         $locationId = getLocationIdByAddress($address);
@@ -55,9 +58,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $locationStmt->bindParam(':locationId', $locationId);
             $locationStmt->bindParam(':rollId', $rollId);
             $locationStmt->execute();
-        }
 
-        assignBusToStudent();
+            assignBusToStudent();
+        } else {
+            // Set the bus and location_id to null if the address doesn't exist
+            $nullQuery = "UPDATE STUDENT SET bus = NULL, location_id = NULL WHERE roll_id = :rollId";
+            $nullStmt = $db_connection->db_connection()->prepare($nullQuery);
+            $nullStmt->bindParam(':rollId', $rollId);
+            $nullStmt->execute();
+        }
 
         $response = [
             'status' => 'success',
@@ -71,11 +80,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             'status' => 'error',
             'message' => 'Database error: ' . $e->getMessage()
         ];
-//        echo json_encode($response);
-        echo "Something Went Wrong";
+        echo $response['message'];
         exit;
     }
 }
+
 // Function to retrieve location_id from the LOCATIONS table based on the address
 function getLocationIdByAddress($address)
 {
@@ -90,9 +99,10 @@ function getLocationIdByAddress($address)
     return ($result !== false) ? $result['location_id'] : null;
 }
 
-function assignBusToStudent(): void
+function assignBusToStudent()
 {
     $db_connection = new \models\Database_Connection();
+
     $sql = "UPDATE STUDENT s
             INNER JOIN LOCATIONS l ON s.location_id = l.location_id AND s.address = l.location_name
             INNER JOIN ROUTES r ON l.route_id = r.route_id
@@ -102,3 +112,5 @@ function assignBusToStudent(): void
     $stmt = $db_connection->db_connection()->prepare($sql);
     $stmt->execute();
 }
+
+// ... (remaining code)

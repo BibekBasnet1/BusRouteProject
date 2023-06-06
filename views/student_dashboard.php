@@ -111,19 +111,19 @@ if (isset($_SESSION["roll_id"])) {
     <!-- NAVBAR -->
     <nav>
         <i class='bx bx-menu' ></i>
-        <a href="#" class="nav-link">Categories</a>
+<!--        <a href="#" class="nav-link">Categories</a>-->
         <form action="../controller/Update_Search.php" method="POST">
-            <div class="form-input">
-                <input type="search" name="search" placeholder="Search...">
-                <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+<!--            <div class="form-input">-->
+<!--                <input type="search" name="search" placeholder="Search...">-->
+<!--                <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>-->
             </div>
         </form>
         <input type="checkbox" id="switch-mode" hidden>
         <label for="switch-mode" class="switch-mode"></label>
-        <a href="#" class="notification">
-            <i class='bx bxs-bell' ></i>
-            <span class="num">8</span>
-        </a>
+<!--        <a href="#" class="notification">-->
+<!--            <i class='bx bxs-bell' ></i>-->
+<!--            <span class="num">8</span>-->
+<!--        </a>-->
         <a href="#" class="profile">
             <img src="img/people.png">
         </a>
@@ -141,7 +141,7 @@ if (isset($_SESSION["roll_id"])) {
                     </li>
                     <li><i class='bx bx-chevron-right'></i></li>
                     <li>
-                        <a class="active" href="#">Home</a>
+                        <a class="active" href="admin_dashboard.php">Home</a>
                     </li>
                 </ul>
             </div>

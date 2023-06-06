@@ -38,6 +38,8 @@ try {
         $stmt->bindValue(":route_id", $routeId);
         $stmt->execute();
 
+        assignLocationAndBusToStudent();
+
         // Redirect back to the original page after the database operation is done
         header("Location: ../views/location_dashboard.php");
         exit();
@@ -52,4 +54,25 @@ try {
     echo "Error: " . $e->getMessage();
 }
 
+// Function to update the bus column in the STUDENT table
+// Function to update the location_id and assign bus to student in the STUDENT table
+function assignLocationAndBusToStudent(): void
+{
+    $db_connection = new \models\Database_Connection();
 
+    // Update the location_id in the STUDENT table based on the address
+    $updateLocationQuery = "UPDATE STUDENT s
+                            INNER JOIN LOCATIONS l ON s.address = l.location_name
+                            SET s.location_id = l.location_id";
+    $updateLocationStmt = $db_connection->db_connection()->prepare($updateLocationQuery);
+    $updateLocationStmt->execute();
+
+    // Update the bus column in the STUDENT table based on the location_id
+    $updateBusQuery = "UPDATE STUDENT s
+                       INNER JOIN LOCATIONS l ON s.location_id = l.location_id
+                       INNER JOIN ROUTES r ON l.route_id = r.route_id
+                       INNER JOIN bus b ON r.bus_id = b.bus_id
+                       SET s.bus = b.bus_num";
+    $updateBusStmt = $db_connection->db_connection()->prepare($updateBusQuery);
+    $updateBusStmt->execute();
+}

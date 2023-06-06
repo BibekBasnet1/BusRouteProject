@@ -73,4 +73,76 @@
         form.style.display = "none";
         // console.log("clicked");
     });
+    // Function to validate the form
+    function validateForm(event) {
+        // Get form data
+        let studentName = document.getElementById('student_name').value;
+        let parentsName = document.getElementById('parents_Name').value;
+        let phoneNo = document.getElementById('phone_no').value;
+        let relationShip = document.getElementById('relationship').value;
+        let location = document.getElementById('location').value;
+        let parentNo = document.getElementById('parent_no').value;
+
+        // Perform validation to check if the field has been left empty
+        if (studentName.trim() === '') {
+            alert('Please enter your name.');
+            event.preventDefault(); // Prevent form submission
+            return;
+        }
+
+        // check if the studentName only contains the string
+        if (!/^[a-zA-Z ]+$/.test(studentName.trim())) {
+            alert('Student name should only contain letters.');
+            event.preventDefault(); // Prevent form submission
+            return;
+        }
+
+
+        if (parentsName.trim() === '') {
+            alert('Please enter parent name.');
+            event.preventDefault(); // Prevent form submission
+            return;
+        }
+
+        // check if the parentName only contains the string
+        if(!/^[a-zA-Z ]+$/.test(parentsName.trim())){
+            alert("Parent Name should only contain strings!");
+            return;
+        }
+
+        if (phoneNo.trim() === '') {
+            alert('Please enter your phone number.');
+            event.preventDefault(); // Prevent form submission
+            return;
+        }
+
+        if(phoneNo.trim() === ''){
+            alert("Please enter phone No");
+            event.preventDefault();
+            return;
+        }
+
+        // check if the phone_no is of 10 digits
+        if (!/^\d{10}$/.test(phoneNo.trim()) && !/^\d{10}$/.test(parentNo.trim())) {
+            alert('Phone number should be 10 digits.');
+            event.preventDefault(); // Prevent form submission
+            return;
+        }
+
+        if (location.trim() === '') {
+            alert('Please enter your address.');
+            event.preventDefault(); // Prevent form submission
+            return;
+        }
+
+        if (parentNo.trim() === '') {
+            alert("Please enter parent's phone number.");
+            event.preventDefault(); // Prevent form submission
+            return;
+        }
+    }
+
+    // Attach form submit event listener
+    document.querySelector('.form-form').addEventListener('submit', validateForm);
+
 </script>
