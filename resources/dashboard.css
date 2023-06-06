@@ -172,6 +172,7 @@ body {
     width: calc(100% - 280px);
     left: 280px;
     transition: .3s ease;
+    min-height: 100vh;
 }
 #sidebar.hide ~ #content {
     width: calc(100% - 60px);
