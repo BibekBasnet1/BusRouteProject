@@ -14,6 +14,7 @@ Some of the feature project contains
 8. Dashboard has dark-mode functionality which can be easier to see the details
 9. Roll_id can be seen on the top of the dashboard who is currently being signed in 
 10. Admin can send the message with the recipient name on it 
+11. There is a profile section where user will be able to see all their details in it
                                    <h2><center>Some Images Of Project</center></h2>
 <br>
 <div class="whole-container">
