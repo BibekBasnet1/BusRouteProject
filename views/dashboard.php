@@ -23,7 +23,7 @@ if (isset($_SESSION["roll_id"])) {
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- My CSS -->
-    <link rel="stylesheet" href="../resources/dashboard.css">
+    <link rel="stylesheet" href="../resources/dash.css">
 
     <title>
         <?php
@@ -74,6 +74,15 @@ if (isset($_SESSION["roll_id"])) {
                 <span class="text">message</span>
             </a>
         </li>
+
+
+        <li>
+            <a href="profile_section.php">
+                <i class='bx bxs-user'></i>
+                <span class="text">Profile</span>
+            </a>
+        </li>
+
     </ul>
     <ul class="side-menu">
         <li>

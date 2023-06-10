@@ -28,7 +28,7 @@ if (isset($_SESSION["roll_id"])) {
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- My CSS -->
-    <link rel="stylesheet" href="../resources/dashboard.css">
+    <link rel="stylesheet" href="../resources/dash.css">
 
     <title>Admin</title>
     <style>
@@ -76,7 +76,7 @@ if (isset($_SESSION["roll_id"])) {
         <li>
             <a href="location_dashboard.php">
                 <i class='bx bxs-doughnut-chart' ></i>
-                <span class="text">Locations</span>
+                <span class="text">Location</span>
             </a>
         </li>
         <li>
@@ -85,6 +85,13 @@ if (isset($_SESSION["roll_id"])) {
                 <span class="text">Message</span>
             </a>
         </li>
+        <li>
+            <a href="profile_section.php">
+                <i class='bx bxs-user'></i>
+                <span class="text">Profile</span>
+            </a>
+        </li>
+
 
     </ul>
     <ul class="side-menu">

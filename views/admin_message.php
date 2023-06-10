@@ -45,7 +45,7 @@ $count3 = $stmt3->fetchColumn();
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- My CSS -->
-    <link rel="stylesheet" href="../resources/dashboard.css">
+    <link rel="stylesheet" href="../resources/dash.css">
 
     <title>Admin</title>
     <style>
@@ -156,6 +156,12 @@ $count3 = $stmt3->fetchColumn();
             <a href="admin_message.php">
                 <i class='bx bxs-message-dots' ></i>
                 <span class="text">Message</span>
+            </a>
+        </li>
+        <li>
+            <a href="profile_section.php">
+                <i class='bx bxs-user'></i>
+                <span class="text">Profile</span>
             </a>
         </li>
 

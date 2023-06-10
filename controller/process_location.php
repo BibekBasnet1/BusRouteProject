@@ -96,3 +96,4 @@ function assignLocationAndBusToStudent(): void
     $updateBusStmt->execute();
 }
 
+

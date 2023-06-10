@@ -45,7 +45,7 @@ $count3 = $stmt3->fetchColumn();
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- My CSS -->
-    <link rel="stylesheet" href="../resources/dashboard.css">
+    <link rel="stylesheet" href="../resources/dash.css">
 
     <title>Admin</title>
     <style>
@@ -105,6 +105,15 @@ $count3 = $stmt3->fetchColumn();
             </a>
         </li>
 
+        <li>
+            <a href="profile_section.php">
+                <i class='bx bxs-user'></i>
+                <span class="text">Profile</span>
+            </a>
+        </li>
+
+
+
     </ul>
     <ul class="side-menu">
         <li>
@@ -158,39 +167,36 @@ $count3 = $stmt3->fetchColumn();
         </div>
         <ul class="box-info">
             <li>
-                <i class='bx bxs-calendar-check'></i>
+<!--                <i class='bx bxs-calendar-check'></i>-->
+                <i class='bx bx-bus-school' ></i>
                 <span class="text">
-
                     <?php
                         echo "<h3>$count1</h3>";
                     ?>
-
-<!-- 						<h3>1020</h3> -->
 
 						<p>Bus 1</p>
 					</span>
             </li>
             <li>
-                <i class='bx bxs-group' ></i>
+<!--                <i class='bx bxs-group' ></i>-->
+                <i class='bx bxs-bus' ></i>
                 <span class="text">
 
                     <?php
                     echo "<h3>$count2</h3>";
                     ?>
-
                     <p>Bus 2</p>
                 </span>
 
             </li>
             <li>
-                <i class='bx bxs-dollar-circle' ></i>
+<!--                <i class='bx bxs-dollar-circle' ></i>-->
+                <i class='bx bx-bus' ></i>
                 <span class="text">
 
                             <?php
                             echo "<h3>$count3</h3>";
                             ?>
-
-<!-- 						<h3>$2543</h3> -->
 
 						<p>Bus 3</p>
                 </span>

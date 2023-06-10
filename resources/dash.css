@@ -719,3 +719,85 @@ svg {
 }
 /* start of the sign up code */
 
+/* start of profile section code */
+
+.profile-container{
+    /*border: 3px solid purple;*/
+
+}
+.profile-container h4{
+    color: var(--dark-grey);
+    font-weight: lighter;
+}
+.profile-container h2{
+    font-weight: lighter;
+    color: var(--dark);
+}
+
+.profile-img-container img{
+    border-radius: 50%;
+    border: 2px solid var(--dark-grey);
+    width: 100px;
+    height: 100px;
+}
+
+.student-info-container{
+    border: 1px solid var(--dark-grey);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin: 2rem;
+    padding: 2rem;
+    background-color: var(--light);
+}
+
+.personal-information {
+    display: flex;
+    margin: 2rem;
+    gap: 1rem;
+    padding: 2rem;
+    flex-direction: column;
+    border: 1px solid silver;
+    background-color: var(--light);
+}
+
+.row-1-info
+{
+    /* border: 2px solid black; */
+    display: flex;
+    justify-content: space-around;
+}
+
+.row-2-info
+{
+    /* border: 2px solid black; */
+    display: flex;
+    justify-content:space-around;
+}
+.info-1,.info-2,.info-3,.info-4,.info-5,.info-6
+{
+    /* border: 2px solid black; */
+    min-width: 200px;
+    padding: 1rem;
+
+}
+.address_details
+{
+    display: flex;
+    border: 1px solid silver;
+    margin: 2rem;
+    padding: 2rem;
+    flex-direction: column;
+    background-color: var(--light);
+}
+
+.row-3-info
+{
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+
+/*end of the profile section code */
