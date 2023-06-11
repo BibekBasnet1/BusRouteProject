@@ -77,7 +77,7 @@ if (isset($_SESSION["roll_id"])) {
 
 
         <li>
-            <a href="profile_section.php">
+            <a href="student_profile.php">
                 <i class='bx bxs-user'></i>
                 <span class="text">Profile</span>
             </a>

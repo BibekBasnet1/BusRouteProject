@@ -1,6 +1,9 @@
 <?php
 //require "../models/Database_Connection.php";
 session_start();
+include_once "../models/Database_Connection.php";
+$db = new \models\Database_Connection();
+
 
 // check if roll_id session variable is set
 if (isset($_SESSION["roll_id"])) {
@@ -12,6 +15,17 @@ if (isset($_SESSION["roll_id"])) {
     header("Location: ../views/index.php");
     exit();
 }
+
+// Setting up the database connection
+$db_connection = $db->db_connection()->prepare("SELECT * FROM STUDENT WHERE roll_id = :roll_id");
+$db_connection->bindParam(':roll_id', $roll_id);
+
+// Executing the statement
+$db_connection->execute();
+
+
+// fetching all the data from the table
+$results = $db_connection->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 <!DOCTYPE html>
@@ -59,7 +73,6 @@ if (isset($_SESSION["roll_id"])) {
             ?>
         </span>
     </a>
-
     <ul class="side-menu top">
         <li class="active">
             <a href="dashboard.php">
@@ -145,79 +158,100 @@ if (isset($_SESSION["roll_id"])) {
                 </ul>
             </div>
         </div>
+        <?php
+        foreach($results as $result){?>
+            <!-- this is the profile container -->
+            <div class="profile-container">
 
-        <div class="table-data">
-            <div class="order">
-                <div class="head">
-                    <h3>Recent Orders</h3>
-                    <i class='bx bx-search' ></i>
-                    <i class='bx bx-filter' ></i>
+                <!-- student info container -->
+                <div class="student-info-container">
+
+                    <!-- this is for storing the profile-img and some contents -->
+                    <div class="profile-img-container">
+                        <img src="" alt="">
+                    </div>
+
+                    <!-- this is for some-context information -->
+                    <div class="text-profile">
+                        <h2>
+                            <?php
+                            echo $result['name'];
+                            ?>
+                        </h2>
+                    </div>
+
                 </div>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Sender_id</th>
-                        <th>Receiver</th>
-                        <th>subject</th>
-                        <th>content</th>
-                        <th>Send At</th>
-                    </tr>
-                    </thead>
+                <!-- end of the student info container -->
 
-                    <!-- ... Rest of the code ... -->
+                <div class="personal-information">
 
-                    <tbody>
-                    <?php
-                    require_once "../models/Database_Connection.php";
-                    $db_connection = new \models\Database_Connection();
+                    <h2 style="text-align: center;">Personal Information </h2><br>
 
-                    $stmt = $db_connection->db_connection()->prepare("SELECT * from messages m inner join STUDENT
-                                                                                      s on m.recipient_id = s.roll_id where recipient_id = ?");
+                    <!-- this is for the row-1 information  -->
+                    <div class="row-1-info">
+                        <div class="info-1">
+                            <h2>
+                                Post
+                            </h2><br>
+                            <h4>
+                                <?php echo $result['user_type'] ; ?>
+                            </h4>
+                        </div>
+                        <div class="info-2">
+                            <h2>Phone</h2><br>
+                            <h4>
+                                <?php echo $result['phone_no'] ; ?>
+                            </h4>
+                        </div>
+                    </div>
 
-                    $stmt->execute([$_SESSION['roll_id']]);
-                    $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    <!-- this is for the row-2 information -->
+                    <div class="row-2-info">
+                        <div class="info-3">
+                            <h2>Email</h2><br>
+                            <h4>
+                                <?php echo $result['email'] ; ?>
+                            </h4>
+                        </div>
+                        <div class="info-4">
+                            <h2>Roll Id</h2><br>
+                            <h4>
+                                <?php
+                                echo $roll_id;
+                                ?>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end of the personal Information -->
 
-                    foreach ($messages as $message) {
-                        ?>
-                            <tr>
-                        <td>
-                            <p>
-                                <?php  echo $message['sender_id']?>
-                            </p>
-                        </td>
-                        <td>
-                            <p>
-                                <?php  echo $message['name']?>
-                            </p>
-                        </td>
-                        <td>
-                            <p>
-                                <?php  echo $message['subject']?>
-                            </p>
-                        </td>
-                        <td>
-                            <p>
-                                <?php  echo $message['content']?>
-                            </p>
-                        </td>
+                <!-- start of the address details -->
 
-                        <td>
-                            <p>
-                                <?php  echo $message['created_at']?>
-                            </p>
-                        </td>
-                            </tr>
-                    <?php
-                    }
-                    ?>
-                    </tbody>
+                <div class="address_details">
 
-                    <!-- ... Rest of the code ... -->
+                    <h2 style="text-align: center;">Address</h2><br>
+                    <div class="row-3-info">
 
-                </table>
+                        <div class="info-5">
+                            <h2>Country</h2><br>
+                            <h4>Nepal</h4>
+                        </div>
+
+                        <div class="info-6">
+                            <h2>Location</h2><br>
+                            <h4>
+                                <?php
+                                echo $result['address'];
+                                ?>
+                            </h4>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- end of the address details -->
             </div>
-
-        </div>
+            <?php
+        }?>
     </main>
     <!-- MAIN -->
 </section>
