@@ -1,6 +1,7 @@
 <?php
 require_once('sign_database_query.php');
 
+
 class SignIn_Control extends sign_database_query
 {
     private $name;
@@ -58,8 +59,6 @@ class SignIn_Control extends sign_database_query
         $this->setUpUser($this->name,$this->parents_name,$this->phone_no,$this->relationship,$this->email,$this->roll_id,$this->parent_no,
             $this->address);
 
-
-
     }
 
     public function updateLocationId($address): void
@@ -70,6 +69,16 @@ class SignIn_Control extends sign_database_query
         $stmt = $this->db_connection()->prepare($sql);
         $stmt->bindParam(':locationId', $locationId);
         $stmt->bindParam(':address', $address);
+        $stmt->execute();
+    }
+
+    public function updateLocationCoordinates($latitude, $longitude): void
+    {
+        $sql = "UPDATE STUDENT SET latitude = :latitude, longitude = :longitude WHERE address = :address";
+        $stmt = $this->db_connection()->prepare($sql);
+        $stmt->bindParam(':latitude', $latitude);
+        $stmt->bindParam(':longitude', $longitude);
+        $stmt->bindParam(':address', $this->address);
         $stmt->execute();
     }
 
@@ -95,6 +104,7 @@ class SignIn_Control extends sign_database_query
         $stmt = $this->db_connection()->prepare($sql);
         $stmt->execute();
     }
+
 
 
     // this helps to check for the empty field if the user has given some empty input

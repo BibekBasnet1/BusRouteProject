@@ -31,8 +31,10 @@ class sign_database_query extends \models\Database_Connection {
             header("Location: ../views/index.php/error=UserSetUpFailed");
             exit();
         }
+
         $stmt = null;
     }
+
 
     protected function checkUserInDatabase($email,$roll_id): bool
     {
@@ -44,5 +46,6 @@ class sign_database_query extends \models\Database_Connection {
         }
         return $stmt->rowCount() == 0;
     }
+
 
 }
