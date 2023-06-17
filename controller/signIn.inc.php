@@ -21,7 +21,14 @@ if (isset($_POST["submit"])) {
 
     try {
         // Call the signUpUser method to perform validation and insert data
-        $signup->signUpUser();
+        try{
+            $signup->signUpUser();
+        }
+        catch(Exception $e){
+            header("Location: ../views/index.php?error=RollIdSame" );
+            exit();
+        }
+
         $signup->updateLocationId($address);
         $signup->assignBusToStudent();
 

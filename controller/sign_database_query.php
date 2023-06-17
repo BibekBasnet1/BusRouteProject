@@ -8,7 +8,7 @@ class sign_database_query extends \models\Database_Connection {
      */
     protected function setUpUser($name, $parents_name, $phone_no, $relationship, $email, $roll_id, $parent_no, $address): void
     {
-        if (!$this->checkUserInDatabase($email, $roll_id)) {
+        if ($this->checkUserInDatabase($email, $roll_id)) {
             // user already exists
             header("Location: ../views/index.php?error=UserExist");
             exit();
@@ -28,7 +28,7 @@ class sign_database_query extends \models\Database_Connection {
 
         ])){
 //            throw new Exception("Failed to set up user");
-            header("Location: ../views/index.php/error=UserSetUpFailed");
+            header("Location: ../views/index.php?error=UserSetUpFailed");
             exit();
         }
 
@@ -36,16 +36,17 @@ class sign_database_query extends \models\Database_Connection {
     }
 
 
-    protected function checkUserInDatabase($email,$roll_id): bool
+    protected function checkUserInDatabase($email, $roll_id): bool
     {
-        $stmt = $this->db_connection()->prepare("SELECT name FROM STUDENT WHERE email = ? and roll_id = ?");
-        if(!$stmt->execute([$email, $roll_id])){
-            $stmt  = null;
-            header("location: ../views/index.php?error=stm-failed");
-            exit();
-        }
-        return $stmt->rowCount() == 0;
+        $stmt = $this->db_connection()->prepare("SELECT name FROM STUDENT WHERE email = ? or roll_id = ?");
+        $stmt->execute([$email, $roll_id]);
+        $rowCount = $stmt->rowCount();
+        $stmt = null;
+
+        return $rowCount > 0;
     }
+
+
 
 
 }

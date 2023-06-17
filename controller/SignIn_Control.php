@@ -22,11 +22,9 @@ class SignIn_Control extends sign_database_query
         $this->roll_id = $roll_id;
         $this->parent_no = $parent_no;
         $this->address = $address;
-
     }
 
     // for all the validation
-
     /**
      * @throws Exception
      */
