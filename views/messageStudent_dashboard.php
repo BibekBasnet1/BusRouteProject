@@ -156,9 +156,9 @@ if (isset($_SESSION["roll_id"])) {
                 <table>
                     <thead>
                     <tr>
-                        <th>Sender_id</th>
-                        <th>Receiver</th>
-                        <th>subject</th>
+<!--                        <th>Sender_id</th>-->
+<!--                        <th>Receiver</th>-->
+<!--                        <th>subject</th>-->
                         <th>content</th>
                         <th>Send At</th>
                     </tr>
@@ -180,21 +180,21 @@ if (isset($_SESSION["roll_id"])) {
                     foreach ($messages as $message) {
                         ?>
                             <tr>
-                        <td>
-                            <p>
-                                <?php  echo $message['sender_id']?>
-                            </p>
-                        </td>
-                        <td>
-                            <p>
-                                <?php  echo $message['name']?>
-                            </p>
-                        </td>
-                        <td>
-                            <p>
-                                <?php  echo $message['subject']?>
-                            </p>
-                        </td>
+<!--                        <td>-->
+<!--                            <p>-->
+<!--                                --><?php // echo $message['sender_id']?>
+<!--                            </p>-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <p>-->
+<!--                                --><?php // echo $message['name']?>
+<!--                            </p>-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <p>-->
+<!--                                --><?php // echo $message['subject']?>
+<!--                            </p>-->
+<!--                        </td>-->
                         <td>
                             <p>
                                 <?php  echo $message['content']?>

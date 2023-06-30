@@ -112,7 +112,12 @@ $count3 = $stmt3->fetchColumn();
             </a>
         </li>
 
-
+        <li>
+            <a href="FileSendAdmin.php">
+                <i class='bx bx-file-blank'></i>
+                <span class="text">Files</span>
+            </a>
+        </li>
 
     </ul>
     <ul class="side-menu">

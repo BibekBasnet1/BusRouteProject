@@ -57,6 +57,37 @@ $results = $db_connection->fetchAll(PDO::FETCH_ASSOC);
             white-space: nowrap;
             overflow-x: hidden;
         }
+        .profile-image-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .change-image-icon {
+            position: absolute;
+            top: -8px;
+            right: 0;
+            /*background-color: var(--orange);*/
+            border-radius: 50%;
+            padding: 8px;
+            cursor: pointer;
+        }
+
+
+        .image-wrapper img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .profile-image-container{
+            border: 2px solid black;
+            padding: 1rem;
+            border-radius: 50%;
+        }
+
+        #file {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -104,7 +135,12 @@ $results = $db_connection->fetchAll(PDO::FETCH_ASSOC);
                 <span class="text">Profile</span>
             </a>
         </li>
-
+        <li>
+            <a href="FileSendAdmin.php">
+                <i class='bx bx-file-blank'></i>
+                <span class="text">Files</span>
+            </a>
+        </li>
     </ul>
 
     <ul class="side-menu">
@@ -175,8 +211,20 @@ $results = $db_connection->fetchAll(PDO::FETCH_ASSOC);
             <div class="student-info-container">
 
                 <!-- this is for storing the profile-img and some contents -->
-                <div class="profile-img-container">
-                    <img src="" alt="">
+<!--                <div class="profile-img-container">-->
+<!--                    <img id="profile-image" src="path_to_default_image.jpg" alt="Profile Image">-->
+<!--                    <input type="file" id="profile-image-upload" accept="image/*" onchange="previewProfileImage(event)">-->
+<!--                </div>-->
+                <div class="profile-image-container">
+                    <div class="img-wrapper">
+                        <img id="profile-image" src="" alt="Profile Image">
+                    </div>
+
+                    <label for="file" class="change-image-icon">
+<!--                        <i class="fas fa-pencil-alt"></i>-->
+                        <i class='bx bxs-edit-alt bx-rotate-90' style='color:#68289b' ></i>
+                    </label>
+                    <input type="file" name="file_name" id="file" accept="image/*" onchange="previewProfileImage(event)">
                 </div>
 
                 <!-- this is for some-context information -->
@@ -266,5 +314,23 @@ $results = $db_connection->fetchAll(PDO::FETCH_ASSOC);
 <!-- CONTENT -->
 
 <script src="../resources/dash_code.js"></script>
+<script>
+    // JavaScript
+    function previewProfileImage(event) {
+        const fileInput = event.target;
+        const profileImage = document.getElementById('profile-image');
+
+        if (fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                profileImage.src = e.target.result;
+            };
+
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+
+</script>
 </body>
 </html>

@@ -170,6 +170,12 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <span class="text">Profile</span>
             </a>
         </li>
+        <li>
+            <a href="FileSendAdmin.php">
+                <i class='bx bx-file-blank'></i>
+                <span class="text">Files</span>
+            </a>
+        </li>
 
 
     </ul>
