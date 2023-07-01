@@ -3,7 +3,7 @@
         <div class="text">
             <div class="description">
                 <p class="des title-bibek">Travel Made Easy</p>
-                <h2 class="des innovate">Choose Your Location, We'll do Rest</h2>
+                <h2 class="des innovate">Choose Your Location, <br>We'll do Rest</h2>
                 <br>
                 <button id="learn_More">
                     <a href="#">Learn More</a>

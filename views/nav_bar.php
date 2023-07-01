@@ -1,4 +1,6 @@
 
+
+
 <!-- start of the header section -->
         <div class="header">
             <nav class="nav-bar">
@@ -15,12 +17,12 @@
                         <a href="#about" class="anchor-nav-links">About</a>
                     </li>
                     <li class="li-link">
-                        <a href="#Features"" class="anchor-nav-links">Features</a>
+                        <a href="#Features" class="anchor-nav-links">Features</a>
                     </li>
                     <li class="li-link">
                         <a href="#contact" class="anchor-nav-links">Contact</a>
                     </li>
-                    <!-- <li class="li-link">F</li> -->
+                    <!-- <li class="li-link">F</li> -->     
                 </ul>
                 <div class="btn-container">
                     <button class="sign-Up">Sign In</button>
@@ -28,4 +30,35 @@
                     <i class="fa-solid fa-moon"></i>
                 </div>
             </nav>
+            <div class="sidebar-toggle">
+                    <img src="../images/hamburger.png" alt="">
+            </div>
+
+            <!-- for the sidebar -->
+            <aside class="sidebar">
+            <div class="sidebar-header">
+              <button class="close-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <!-- links -->
+            <ul class="links">
+                <li class="nav-list">
+                  <a href="#home-section">home</a>
+                </li>
+                <li class="nav-list">
+                  <a href="#about">About</a>
+                </li>
+                <li class="nav-list">
+                  <a href="#Features">Features</a>
+                </li>
+                <li class="nav-list">
+                  <a href="#contact">Contact</a>
+                </li>
+            </ul>
+            <div class="btn-container">
+                  <button class="sign">Sign In</button>
+                  <button class="log">Login</button>
+            </div>
+          </aside>
+          <!-- end of the sidebar -->
+        </nav>
         </div>

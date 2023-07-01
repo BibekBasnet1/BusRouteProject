@@ -19,10 +19,8 @@
         </div>
         <div class="description container-admin-des">
             <h3 style="margin-bottom:1rem; margin-top: 4rem;">Teacher <img src="../images/teacher.png" width="20px" alt=""></h3>
-            <p>Admin will be able to manage the pickUps through customized dashboard.
-                Admin will be able to see the details of the students and as well as
-                drivers. Admin will have every access rights and will be able easily manage
-                the students as well as provide scheduled pickUps.
+            <p>
+                Admin will be able to manage their Bus Route and Assign a Bus based on their location 
             </p>
         </div>
     </div>

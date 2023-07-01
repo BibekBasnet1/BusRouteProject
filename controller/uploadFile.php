@@ -18,7 +18,8 @@ $appkey = '	o4ieswzrk70v7gk';
 $secretKey = "lt1a4on2d9t0brm";
 $accessToken = 'sl.BhQVA5xt-knfKVHo4aiNWE0OypnVxCl0bVN8Quj3C30cR0ZQKBe023S563ndHAyrF7saDuuGX7RV2n3C5qioyZoB_E8vq0XiJd8sZYYZ0-xLYZpH_RCx5xCs2RKcB9cQvFjoWfKabf0';
 
-if (isset($_FILES["file_name"]) && $_FILES["file_name"]["error"] === UPLOAD_ERR_OK) {
+if (isset($_FILES["file_name"]) && $_FILES["file_name"]["error"] === UPLOAD_ERR_OK)
+{
     // Get the uploaded file details
     $file = $_FILES["file_name"];
 

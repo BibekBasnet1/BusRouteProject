@@ -173,12 +173,7 @@ $count3 = $stmt3->fetchColumn();
 
     </ul>
     <ul class="side-menu">
-        <li>
-            <a href="#">
-                <i class='bx bxs-cog' ></i>
-                <span class="text">Settings</span>
-            </a>
-        </li>
+
         <li>
 
             <a href="../controller/Logout.php" class="logout">

@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../resources/style.css">
+    <link rel="stylesheet" href="../resources/index.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <!-- Boxicons CSS -->
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
@@ -52,7 +52,7 @@
             include_once "./footer.php";
         ?>
         <!--        end of the footer section -->
-    <script src="../resources/style.js"></script>
+    <script src="../resources/index.js"></script>
     <!-- <script src="https://kit.fontawesome.com/adae769a6b.js" crossorigin="anonymous"></script> -->
 </body>
 
