@@ -25,6 +25,12 @@ $stmt->execute();
 // to fetch the data from the database
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// to fetch the route number from the database
+$routeNumbers = $db_connection->db_connection()->prepare("SELECT * FROM ROUTES");
+$routeNumbers->execute();
+
+$routeResult = $routeNumbers->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,6 +89,10 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             border: 1px solid var(--dark-grey);
             /*border-bottom: 1px solid #611bf5;*/
         }
+        #route{
+            width: 100%;
+            background-color: var(--light);
+        }
         form input[type="text"]#location:focus,form input[type="number"]#route:focus
         {
             outline: none;
@@ -129,73 +139,9 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 <!-- SIDEBAR -->
-<section id="sidebar">
-    <a href="#" class="brand">
-        <i class='bx bxs-smile'></i>
-        <span class="text">
-            <?php
-            // to print the session
-            echo $_SESSION['roll_id'];
-            ?>
-        </span>
-    </a>
-    <ul class="side-menu top">
-        <li class="active">
-            <a href="admin_dashboard.php">
-                <i class='bx bxs-dashboard' ></i>
-                <span class="text">Dashboard</span>
-            </a>
-        </li>
-        <li>
-            <a href="student_dashboard.php">
-                <i class='bx bxs-shopping-bag-alt' ></i>
-                <span class="text">Student</span>
-            </a>
-        </li>
-        <li>
-            <a href="location_dashboard.php">
-                <i class='bx bxs-doughnut-chart' ></i>
-                <span class="text">Location</span>
-            </a>
-        </li>
-        <li>
-            <a href="admin_message.php">
-                <i class='bx bxs-message-dots' ></i>
-                <span class="text">Message</span>
-            </a>
-        </li>
-        <li>
-            <a href="profile_section.php">
-                <i class='bx bxs-user'></i>
-                <span class="text">Profile</span>
-            </a>
-        </li>
-        <li>
-            <a href="FileSendAdmin.php">
-                <i class='bx bx-file-blank'></i>
-                <span class="text">Files</span>
-            </a>
-        </li>
-
-
-    </ul>
-    <ul class="side-menu">
-        <li>
-            <a href="#">
-                <i class='bx bxs-cog' ></i>
-                <span class="text">Settings</span>
-            </a>
-        </li>
-        <li>
-
-            <a href="../controller/Logout.php" class="logout">
-                <i class='bx bxs-log-out-circle' ></i>
-                <span class="text">Logout</span>
-            </a>
-        </li>
-
-    </ul>
-</section>
+<?php
+    include_once "sidebar.php";
+?>
 <!-- SIDEBAR -->
 
 <!-- CONTENT -->
@@ -281,6 +227,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </table>
             </div>
         </div>
+                    
 
         <!-- Add location form -->
         <div class="location_update_form_container">
@@ -297,7 +244,16 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
                 <div class="row-2 route_data">
                     <label for="route"></label>
-                    <input type="number" name="route_number" id="route" placeholder="Enter Route Number" required>
+                   
+                    <select name="route_number" id="route">
+                    <?php 
+                        foreach($routeResult as $route){
+                    ?>
+                        <option value="<?php echo $route['route_id'] ;?>"><?php  echo $route['route_name']; ?></option>
+                        <?php } ?>
+                    </select>
+                    
+                    <!-- <input type="number" name="route_number" id="route" placeholder="Enter Route Number" required> -->
                 </div>
                 <div class="row-3">
                     <label for="location_id"></label>

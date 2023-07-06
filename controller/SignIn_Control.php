@@ -33,7 +33,7 @@ class SignIn_Control extends sign_database_query
         // this is to help if the input user has given is empty
         if(!$this->emptyInput()){
             header("Location: ../views/index.php?error=emptyInput");
-//            echo "empty Input";
+            
 //            var_dump($this->email,$this->address,$this->relationship,$this->name,$this->phone_no,$this->parents_name,$this->roll_id,$this->parent_no);
             exit();
         }

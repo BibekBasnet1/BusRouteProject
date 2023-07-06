@@ -53,7 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $recipientId = $result['roll_id'];
 
         // Send the message
-        if (sendMessage($senderId, $recipientId, $subject, $content)) {
+        if (sendMessage($senderId, $recipientId, $subject, $content)) 
+        {
             // Message sent successfully
             $response = array(
                 'status' => 'success',
