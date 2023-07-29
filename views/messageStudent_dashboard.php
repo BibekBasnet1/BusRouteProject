@@ -128,22 +128,8 @@ if (isset($_SESSION["roll_id"])) {
 
                     foreach ($messages as $message) {
                         ?>
-                            <tr>
-<!--                        <td>-->
-<!--                            <p>-->
-<!--                                --><?php // echo $message['sender_id']?>
-<!--                            </p>-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                            <p>-->
-<!--                                --><?php // echo $message['name']?>
-<!--                            </p>-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                            <p>-->
-<!--                                --><?php // echo $message['subject']?>
-<!--                            </p>-->
-<!--                        </td>-->
+                    <tr>
+
                         <td>
                             <p>
                                 <?php  echo $message['content']?>
@@ -155,7 +141,7 @@ if (isset($_SESSION["roll_id"])) {
                                 <?php  echo $message['created_at']?>
                             </p>
                         </td>
-                            </tr>
+                    </tr>
                     <?php
                     }
                     ?>
