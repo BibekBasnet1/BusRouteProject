@@ -164,7 +164,9 @@ if (isset($_SESSION["roll_id"])) {
             })
             .then(function(data) {
                 // Display the response in the container
-                document.getElementById('response').textContent = data;
+                // document.getElementById('response').textContent = data;
+                console.log(data);
+                alert("uploaded");
             })
             .catch(function(error) {
                 // Display any errors

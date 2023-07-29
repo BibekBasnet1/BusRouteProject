@@ -16,7 +16,7 @@ use Kunnu\Dropbox\Exceptions\DropboxClientException;
 // these are for the keys we need to access the folder and files in the dropbox
 $appkey = '	o4ieswzrk70v7gk';
 $secretKey = "lt1a4on2d9t0brm";
-$accessToken = 'sl.BhQVA5xt-knfKVHo4aiNWE0OypnVxCl0bVN8Quj3C30cR0ZQKBe023S563ndHAyrF7saDuuGX7RV2n3C5qioyZoB_E8vq0XiJd8sZYYZ0-xLYZpH_RCx5xCs2RKcB9cQvFjoWfKabf0';
+$accessToken = 'sl.BiLJuA5AEThu2QLcqYZp0NTbCkXgOPMVSq9Q0h2akpq4pgv32EaTZxb355b9-ssaEeIBmwF7cvWyax4qgNJxwikF5IoprbnZGmkqE_KImrV5SEt6ZQcE8F4MNGqBqh-SuzFRoA8Lzr0';
 
 if (isset($_FILES["file_name"]) && $_FILES["file_name"]["error"] === UPLOAD_ERR_OK)
 {

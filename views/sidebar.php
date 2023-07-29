@@ -54,6 +54,12 @@
                 <span class="text">bus</span>
             </a>
         </li>
+        <li>
+            <a href="route.php">
+                <i class='bx bx-file-blank'></i>
+                <span class="text">Routes</span>
+            </a>
+        </li>
 
     </ul>
     <ul class="side-menu">
