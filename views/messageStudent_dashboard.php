@@ -50,7 +50,7 @@ if (isset($_SESSION["roll_id"])) {
 
 <!-- SIDEBAR -->
 <?php
-    include_once "sidebar.php";
+    include_once "student_sidebar.php";
 ?>
 <!-- SIDEBAR -->
 
@@ -105,9 +105,7 @@ if (isset($_SESSION["roll_id"])) {
                 <table>
                     <thead>
                     <tr>
-<!--                        <th>Sender_id</th>-->
-<!--                        <th>Receiver</th>-->
-<!--                        <th>subject</th>-->
+
                         <th>content</th>
                         <th>Send At</th>
                     </tr>

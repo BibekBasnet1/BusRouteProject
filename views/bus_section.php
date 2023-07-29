@@ -172,31 +172,6 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <input type="text" id="searchInput" placeholder="Search...">
                         <i class="bx bx-search search-icon"></i>
                         <i class="bx bx-plus-circle add_bus"></i>
-
-<<<<<<< HEAD
-        </div>
-        <table>
-            <thead>
-            <tr>
-                <th>Bus No</th>
-                <th>Driver Name</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-                <?php
-                    $count = 0;
-                ?>
-            <?php
-            foreach($results as $result){
-                $count++;
-                ?>
-                <tr>
-
-                    <td>
-                        <?php  echo $result['bus_num']  ?>
-                    </td>
-=======
                     </div>
                     <table>
                         <thead>
@@ -216,7 +191,6 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             ?>
                                 <tr>
                                     <!-- <td> -->
->>>>>>> 5a8d9b7d49b3b0cb1d333161fe8a4a415dfedc97
 
                                     <!-- </td> -->
                                     <td>
@@ -310,17 +284,6 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // this is for the deletion logic in the controller 
 
-<<<<<<< HEAD
-</main>
-</section>
-
-    <script>
-
-        
-    </script>
-
-</body>
-=======
     delteBusInfo.forEach((btn) => {
         btn.addEventListener('click', (e) => {
             // e.preventDefault();
@@ -394,4 +357,3 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         })
     })
 </script>
->>>>>>> 5a8d9b7d49b3b0cb1d333161fe8a4a415dfedc97

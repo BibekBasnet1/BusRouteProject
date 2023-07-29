@@ -29,6 +29,11 @@ $stmt->execute();
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
+$bus = $db_connection->db_connection()->prepare("select * from bus");
+$bus->execute();
+
+$buses = $bus->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 
@@ -56,6 +61,56 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             color: var(--dark);
             white-space: nowrap;
             overflow-x: hidden;
+        }
+
+        #bus_route_number select {
+            /* background-color: blue; */
+            width: 100%;
+            height: 2rem;
+            text-align: center;
+        }
+
+        .update_route_form {
+            position: fixed;
+            display: none;
+            top: 50%;
+            left: 50%;
+            justify-content: center;
+            align-items: center;
+            transform: translate(-50%, -50%);
+            /*background: rgba(0, 0, 0, 0.5);*/
+            /* backdrop-filter: blur(5px); */
+            z-index: 9999;
+            width: 20%;
+            height: 55%;
+            background-color: #ffffff;
+        }
+
+        .RouteName,
+        .routeNumber,
+        .route_id {
+            width: 100%;
+            padding: 0.3rem;
+        }
+
+        .btn-route-update {
+            display: block;
+            position: absolute;
+            margin-top: 20px;
+            padding: 10px 10px 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #611BF5;
+            color: #fff;
+            cursor: pointer;
+            width: 90%;
+            /* margin: 1rem; */
+        }
+
+        .btn-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
         }
     </style>
 </head>
@@ -109,9 +164,9 @@ include_once "sidebar.php";
             <div class="order">
                 <div class="head">
                     <h3 style="text-align: center;">Route Details</h3>
-                    <input type="text" id="searchInput" placeholder="Search...">
-                    <i class="bx bx-search search-icon"></i>
-                    <i class="bx bx-plus-circle add_bus"></i>
+                    <!-- <input type="text" id="searchInput" placeholder="Search..."> -->
+                    <!-- <i class="bx bx-search search-icon"></i> -->
+                    <i class="bx bx-plus-circle add_route"></i>
 
                 </div>
                 <table>
@@ -122,40 +177,80 @@ include_once "sidebar.php";
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <?php foreach($results as $result)
-                    {
-                        ?>
-                    <tbody>
+                    <?php foreach ($results as $result) {
+                    ?>
+                        <tbody>
 
-                        <tr>
-                            <td>
-                                <?php echo  $result['route_name'] ; ?>
-                            </td>
-                            
-                            <td>
-                                <?php echo $result['bus_id'] ; ?>
-                            </td>
+                            <tr>
+                                <td>
+                                    <?php echo  $result['route_name']; ?>
+                                </td>
 
-                            <td>
-                                <button type="submit" class="delete_route"  data-routeId = "<?php  echo $result['route_id'];?>" >
-                                        Delete                                 
-                                </button>
-                            </td>
+                                <td>
+                                    <?php echo $result['bus_id']; ?>
+                                </td>
 
-                            <td>
-                                <button type="submit" class="update_route"  data-routeId = "<?php  echo $result['route_id'];  ?> " >
-                                        Update                                 
-                                </button>
-                            </td>
-                            
-                        </tr>
+                                <td>
+                                    <button type="submit" class="update_route" data-routeId="<?php echo $result['route_id'];  ?> ">
+                                        Update
+                                    </button>
+                                </td>
 
+                                <td>
+                                    <button type="submit" class="delete_route" data-routeId="<?php echo $result['route_id']; ?>">
+                                        Delete
+                                    </button>
+                                </td>
 
-                    </tbody>
+                            </tr>
+
+                        </tbody>
                     <?php } ?>
                 </table>
             </div>
+        </div>
 
+        <div class="update_route_form">
+            <form action="../controller/add_route.php" class="route-container" method="POST">
+                <h1 style="margin-bottom: 1rem; text-align: center">Add Route</h1>
+                <!-- <p class="error-message"></p><br> -->
+                <div class="exit-form wrong-location-form" style="text-align: right;position: relative;top: 0;right:0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: rotate(180deg);msFilter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2);">
+                        <path d="M9.172 16.242 12 13.414l2.828 2.828 1.414-1.414L13.414 12l2.828-2.828-1.414-1.414L12 10.586 9.172 7.758 7.758 9.172 10.586 12l-2.828 2.828z"></path>
+                        <path d="M12 22c5.514 0 10-4.486 10-10S17.514 2 12 2 2 6.486 2 12s4.486 10 10 10zm0-18c4.411 0 8 3.589 8 8s-3.589 8-8 8-8-3.589-8-8 3.589-8 8-8z"></path>
+                    </svg>
+                </div>
+                <div class="row-1 routeNumber" id="bus_route_number">
+
+                    <label for="">Bus Number</label>
+                    <select name="bus_id" id="">
+
+                        <?php foreach ($buses as $result) {
+                        ?>
+                            <option value="<?php echo $result['bus_id'];  ?>"><?php echo $result['bus_num']; ?></option>
+                        <?php
+                        } ?>
+
+                    </select>
+
+                </div>
+
+                <div class="row-2 RouteName">
+                    <label for="route">Route Name</label>
+                    <input type="text" name="route_name" id="route_name" placeholder="Enter Route Name" required>
+                </div>
+
+                <div class="row-3 route_id">
+                    <label for="route">Route Number</label>
+                    <input type="text" name="route_id" id="route_id" placeholder="Enter Route Number" required>
+                </div>
+
+
+                <div class="btn-container">
+                    <button type="submit" class="btn-route-update" name="submit">Insert</button>
+                </div>
+            </form>
+        </div>
 
     </main>
     <!-- MAIN -->
@@ -163,26 +258,41 @@ include_once "sidebar.php";
     <script src="../resources/dash_code.js"></script>
 </section>
 <script>
+    const wrongImage = document.querySelector(".exit-form");
+    const addForm = document.querySelector(".update_route_form");
+    const addButton = document.querySelector(".add_route");
+    const tableData = document.querySelector(".table-data");
+
+    addButton.addEventListener('click', () => {
+        addForm.style.display = "flex";
+        tableData.style.filter = "blur(5px)";
+    })
+
+
+    wrongImage.addEventListener('click', () => {
+        addForm.style.display = "none";
+
+    })
+
+
+
     const deleteRouteBtn = document.querySelectorAll(".delete_route");
     // console.log(deleteRouteBtn)
-    deleteRouteBtn.forEach(btn=>{
-        btn.addEventListener('click',()=>{
+    deleteRouteBtn.forEach(btn => {
+        btn.addEventListener('click', () => {
             let deleteAttribute = btn.getAttribute('data-routeId');
             // console.log(deleteAttribute);
-            fetch(`../controller/deleteRoute.php`,
-            {
-                method: 'POST',
-                body :JSON.stringify(
-                    {
-                        route_id : deleteAttribute,
-                    }
-                ),
-            })
-            .then(response=>response.json())
-            .then((data)=>{
-                console.log(data);
-            })
-            .catch(error=>console.log(error));
+            fetch(`../controller/deleteRoute.php`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        route_id: deleteAttribute,
+                    }),
+                })
+                .then(response => response.json())
+                .then((data) => {
+                    console.log(data);
+                })
+                .catch(error => console.log(error));
         });
-    })  
+    })
 </script>
