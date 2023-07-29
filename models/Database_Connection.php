@@ -9,8 +9,8 @@ class Database_Connection
     public function db_connection(){
         try {
 //            $servername = "localhost";
-            $username = "bus_route_project_admin";
-            $password = "ruby";
+            $username = "bibek";
+            $password = "bibek";
 //            $db_name = "bus_route";
             return new PDO('mysql:host=localhost;dbname=bus_route',$username,$password);
         }

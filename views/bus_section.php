@@ -143,9 +143,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <table>
             <thead>
             <tr>
-                <th>S.N</th>
-<!--                <th>Email</th>-->
-                <th>Bus Number</th>
+                <th>Bus No</th>
                 <th>Driver Name</th>
                 <th>Action</th>
             </tr>
@@ -159,9 +157,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 $count++;
                 ?>
                 <tr>
-                    <td>
-                        <?=  $count; ?>
-                    </td>
+
                     <td>
                         <?php  echo $result['bus_num']  ?>
                     </td>
