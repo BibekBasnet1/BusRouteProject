@@ -328,7 +328,6 @@ $routeResult = $routeNumbers->fetchAll(PDO::FETCH_ASSOC);
 
     function deleteRow(button) {
         let locationId = button.getAttribute("data-locationid");
-        console.log(locationId);
         // Confirm deletion
         if (confirm("Are you sure you want to delete this row?")) {
             // Send AJAX request to delete the row

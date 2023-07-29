@@ -1,7 +1,6 @@
 <?php
 require_once('sign_database_query.php');
 
-
 class SignIn_Control extends sign_database_query
 {
     private $name;
