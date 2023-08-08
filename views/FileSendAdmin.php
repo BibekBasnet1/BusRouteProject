@@ -133,6 +133,7 @@ if (isset($_SESSION["roll_id"])) {
                 <input type="file" name="file_name" id="file" class="file-input">
                 <button type="submit" class="submit-button">Upload</button>
             </form>
+            <!-- <div id="fileDisplay"></div> -->
         </div>
 
         <!-- end of the main important part -->
@@ -144,6 +145,9 @@ if (isset($_SESSION["roll_id"])) {
 <script src="../resources/dash_code.js"></script>
 
 <script>
+
+
+
 
     let form = document.querySelector('.file-upload-form');
     function submitForm(event) {

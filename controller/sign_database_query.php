@@ -26,8 +26,10 @@ class sign_database_query extends \models\Database_Connection {
             ':parent_no' => $parent_no,
             ':address' => $address,
 
-        ])){
-//            throw new Exception("Failed to set up user");
+        ]))
+        {
+//           throw new Exception("Failed to set up user");
+            echo "<p class='userSetUpFailed'>User Set Up Failed</p>";
             header("Location: ../views/index.php?error=UserSetUpFailed");
             exit();
         }
@@ -46,7 +48,10 @@ class sign_database_query extends \models\Database_Connection {
         return $rowCount > 0;
     }
 
-
-
-
 }
+?>
+<script>
+    const userSetUp = document.querySelector(".userSetUpFailed");
+    toastr.warning(userSetUp.textContent);
+
+</script>

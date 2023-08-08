@@ -15,9 +15,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $deleteId = $data['delete_id'];
 
         // var_dump($deleteId);
+
+        // to set the student bus number to null
+        $query = $db_connection->db_connection()->prepare("UPDATE STUDENT SET bus = NULL WHERE bus = $deleteId");
+        // $query->bindValue(':bus',$deleteId);
+        $query->execute();
+ 
+        // setting route bus_id to null
+        $route = $db_connection->db_connection()->prepare("UPDATE ROUTES SET bus_id = NULL WHERE bus_id = :bus_id");
+        $route->bindValue(':bus_id',$deleteId);
+        $route->execute();
+
+        // deleteing the record bus
         $stmt = $db_connection->db_connection()->prepare("DELETE FROM bus WHERE bus_id = :bus_id");
         $stmt->bindValue(':bus_id', $deleteId);
         $stmt->execute();
+        
+        
     
         // echo "Affected rows: " . $stmt->rowCount(); // Debugging statement
         $response = [

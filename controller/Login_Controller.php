@@ -6,10 +6,14 @@ class Login_Controller extends Login_Database_Query
 {
     private $email;
     private $roll_id;
+    private $loginStatus;
+    private $errorMessage;
 
     public function __construct($email,$roll_id){
         $this->email = $email;
         $this->roll_id = $roll_id;
+        // $this->loginStatus = false;
+        // $this->errorMessage = "";
     }
 
     public function loginUser(): void
@@ -20,7 +24,11 @@ class Login_Controller extends Login_Database_Query
         }
         $this->getUser($this->email,$this->roll_id);
 
+        // $this->loginStatus = false;
+        // $this->errorMessage = "Invalid email or password. Please try again.";
+
     }
+
 
 
     // check if the user is trying to submit without entering values in the input fields

@@ -34,7 +34,6 @@ while ($row = $buses->fetch(PDO::FETCH_ASSOC)) {
 }
 
 
-
 ?>
 <!DOCTYPE html>
 
@@ -62,6 +61,7 @@ while ($row = $buses->fetch(PDO::FETCH_ASSOC)) {
             overflow-x: hidden;
         }
     </style>
+    <!-- <link href="toastr.css" rel="stylesheet"/> -->
 </head>
 
 <body>
@@ -124,11 +124,11 @@ while ($row = $buses->fetch(PDO::FETCH_ASSOC)) {
 
             </ul>
 
-
             <!-- this is for the form container      -->
             <?php
             include_once "updated_form.php";
             ?>
+
             <!--  this is the end of the form container -->
             <?php
             include_once "../controller/Update_Search.php";
@@ -140,6 +140,7 @@ while ($row = $buses->fetch(PDO::FETCH_ASSOC)) {
     <!-- CONTENT -->
 
     <script src="../resources/dash_code.js"></script>
+    <!-- <script src="toastr.js"></script> -->
 </body>
 
 </html>

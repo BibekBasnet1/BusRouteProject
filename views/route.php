@@ -30,9 +30,19 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 $bus = $db_connection->db_connection()->prepare("select * from bus");
+$bus_num = $db_connection->db_connection()->prepare("select bus_num from bus inner join ROUTES on bus.bus_id = ROUTES.bus_id");
+$bus_num->execute();
 $bus->execute();
 
 $buses = $bus->fetchAll(PDO::FETCH_ASSOC);
+$bus_numbers =  $bus_num->fetchAll(PDO::FETCH_ASSOC);
+// dd($buses);
+
+$busNumbers  = [];
+foreach ($bus_numbers as $bus_num)
+{
+    array_push($busNumbers,$bus_num['bus_num']);
+}
 
 ?>
 
@@ -91,6 +101,21 @@ $buses = $bus->fetchAll(PDO::FETCH_ASSOC);
         .route_id {
             width: 100%;
             padding: 0.3rem;
+        }
+
+        .delete_route,
+        .update_route {
+            font-size: 1rem;
+            padding: 0.5em 1em;
+            border: transparent;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+            background: red;
+            color: white;
+            border-radius: 4px;
+        }
+
+        .update_route {
+            background: var(--blue);
         }
 
         .btn-route-update {
@@ -186,9 +211,17 @@ include_once "sidebar.php";
                                     <?php echo  $result['route_name']; ?>
                                 </td>
 
-                                <td>
-                                    <?php echo $result['bus_id']; ?>
-                                </td>
+
+
+                                    
+                                    <!-- <?php foreach ($busNumbers as $bus_num) {?>
+                                        <td>
+                                        <?php echo  $bus_num; ?>
+                                        </td>
+
+                                    <?php } ?>
+                                     -->
+                                        
 
                                 <td>
                                     <button type="submit" class="update_route" data-routeId="<?php echo $result['route_id'];  ?> ">
@@ -197,9 +230,12 @@ include_once "sidebar.php";
                                 </td>
 
                                 <td>
-                                    <button type="submit" class="delete_route" data-routeId="<?php echo $result['route_id']; ?>">
-                                        Delete
-                                    </button>
+                                    <form action="../controller/deleteRoute.php" method="post">
+                                        <input type="hidden" name="route_id" value="<?php echo $result['route_id']; ?>">
+                                        <button type="submit" class="delete_route" data-routeId="<?php echo $result['route_id']; ?>">
+                                            Delete
+                                        </button>
+                                    </form>
                                 </td>
 
                             </tr>
@@ -210,8 +246,11 @@ include_once "sidebar.php";
             </div>
         </div>
 
+        <!-- to insset -->
         <div class="update_route_form">
+
             <form action="../controller/add_route.php" class="route-container" method="POST">
+
                 <h1 style="margin-bottom: 1rem; text-align: center">Add Route</h1>
                 <!-- <p class="error-message"></p><br> -->
                 <div class="exit-form wrong-location-form" style="text-align: right;position: relative;top: 0;right:0">
@@ -223,6 +262,7 @@ include_once "sidebar.php";
                 <div class="row-1 routeNumber" id="bus_route_number">
 
                     <label for="">Bus Number</label>
+
                     <select name="bus_id" id="">
 
                         <?php foreach ($buses as $result) {
@@ -250,6 +290,7 @@ include_once "sidebar.php";
                     <button type="submit" class="btn-route-update" name="submit">Insert</button>
                 </div>
             </form>
+
         </div>
 
     </main>
@@ -257,6 +298,7 @@ include_once "sidebar.php";
 
     <script src="../resources/dash_code.js"></script>
 </section>
+
 <script>
     const wrongImage = document.querySelector(".exit-form");
     const addForm = document.querySelector(".update_route_form");
@@ -271,28 +313,16 @@ include_once "sidebar.php";
 
     wrongImage.addEventListener('click', () => {
         addForm.style.display = "none";
-
     })
-
-
-
-    const deleteRouteBtn = document.querySelectorAll(".delete_route");
-    // console.log(deleteRouteBtn)
-    deleteRouteBtn.forEach(btn => {
-        btn.addEventListener('click', () => {
-            let deleteAttribute = btn.getAttribute('data-routeId');
-            // console.log(deleteAttribute);
-            fetch(`../controller/deleteRoute.php`, {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        route_id: deleteAttribute,
-                    }),
-                })
-                .then(response => response.json())
-                .then((data) => {
-                    console.log(data);
-                })
-                .catch(error => console.log(error));
+    // const deleteBtn = document.querySelectorAll(".delete_route");
+    const deleteBtns = document.querySelectorAll(".delete_route");
+    deleteBtns.forEach(deleteBtn => {
+        deleteBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            let answer = prompt("Do you want to delete the route? Some Students may still be associated with the route. Enter 'yes' to confirm.");
+            if (answer === "yes") {
+                deleteBtn.closest('form').submit();
+            }
         });
-    })
+    });
 </script>

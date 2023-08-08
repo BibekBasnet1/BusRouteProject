@@ -45,6 +45,18 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             justify-content: center;
             margin-top: 4rem;
 
+            
+        }
+
+        .btn_bus_update_btn
+        {
+            font-size: 1rem;
+            padding: 0.5em 1em;
+            border: transparent;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+            background: var(--blue);
+            color: white;
+            border-radius: 4px;      
         }
 
         .delete-bus {
@@ -122,7 +134,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             padding: 2rem;
         }
 
-        .btn-bus-update {
+        .btn-bus-insert {
             display: block;
             margin-top: 20px;
             padding: 10px 10px 10px 0;
@@ -204,8 +216,8 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     </td>
 
                                     <td>
-                                
-                                        <button type="button" class="edit-btn" id="data-busId" data-busId="<?php echo $result['bus_id']; ?>" >Update</button>
+
+                                        <button type="button" class="btn_bus_update_btn" id="data-busId" data-busId="<?php echo $result['bus_id']; ?>">Update</button>
 
                                     </td>
 
@@ -233,12 +245,15 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <label for="location"></label>
                             <input type="text" name="bus_num" id="bus_num" placeholder="Enter Bus num" required>
                         </div>
+
                         <div class="row-2 driver_data">
                             <label for="route"></label>
                             <input type="text" name="driver_name" id="driver_name" placeholder="Enter Driver Name" required>
                         </div>
+
+                        <!-- this is for the btn-container  -->
                         <div class="btn-container">
-                            <button type="submit" class="btn-bus-update" name="submit">Update</button>
+                            <button type="submit" class="btn-bus-insert" name="submit">Insert</button>
                         </div>
                     </form>
                 </div>
@@ -248,23 +263,28 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <!-- this is for the updation  -->
 
                 <div class="update_bus">
-                    <form action="" class="container-form">
+
+                    <form action="" class="container-form update_bus_form">
+
                         <h1 style="margin-bottom: 1.5rem; text-align: center">Update Bus</h1>
-                        <!-- <p class="error-message"></p><br> -->
-                        <div class="image-wrong wrong-location-form" style="text-align: right;position: relative;top: 0;right:0">
+
+                        <div class="exit_form" style="text-align: right;position: relative;top: 0;right:0">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: rotate(180deg);msFilter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2);">
                                 <path d="M9.172 16.242 12 13.414l2.828 2.828 1.414-1.414L13.414 12l2.828-2.828-1.414-1.414L12 10.586 9.172 7.758 7.758 9.172 10.586 12l-2.828 2.828z"></path>
                                 <path d="M12 22c5.514 0 10-4.486 10-10S17.514 2 12 2 2 6.486 2 12s4.486 10 10 10zm0-18c4.411 0 8 3.589 8 8s-3.589 8-8 8-8-3.589-8-8 3.589-8 8-8z"></path>
                             </svg>
                         </div>
+
                         <div class="row-1 bus-data">
                             <label for="location">Bus Num</label>
-                            <input type="text" name="bus_num" id="bus_num" placeholder="Enter Bus num" required>
+                            <input type="text" name="bus-no" id="bus-no" placeholder="Bus num" value="" required>
                         </div>
+
                         <div class="row-2 driver_data">
                             <label for="route">Driver Name</label>
-                            <input type="text" name="driver_name" id="driver_name" placeholder="Enter Driver Name" required>
+                            <input type="text" name="driver_name" id="driver_identity" placeholder="Enter Driver Name" required>
                         </div>
+
                         <div class="btn-container">
                             <button type="submit" class="btn-bus-update" name="submit">Update</button>
                         </div>
@@ -322,9 +342,9 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     const formDocument = document.querySelector(".Bus_Update");
     const wrongImage = document.querySelector(".image");
     const updateImageWrong = document.querySelector('.image-wrong');
-    const updateBtnBus = document.querySelector('.edit-btn');
+    // const updateBtnBus = document.querySelector('.edit-btn');
     const update_bus = document.querySelector('.update_bus');
-    const edit_btn = document.querySelectorAll(".edit-btn");
+    // const edit_btn = document.querySelectorAll(".edit-btn");
 
     addButton.addEventListener('click', () => {
         formDocument.style.display = "flex";
@@ -336,23 +356,64 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     })
 
-    updateImageWrong.addEventListener('click', () => {
-        update_bus.style.display = "none";
-    })
 
     // when submit to insert the new data
 
-    edit_btn.forEach((btn) => {
-        
+
+
+    // this is for the updation of the bus details 
+    const updateForm = document.querySelector('.update_bus_form');
+    const updateSubmitBtn = document.querySelector(".btn-bus-update");
+    const btn_bus_update_btn = document.querySelectorAll(".btn_bus_update_btn");
+    const exitForm = document.querySelector('.exit_form');
+    // console.log(updateForm);
+
+
+    // onclick close button remove the form from the element 
+
+    exitForm.addEventListener('click', (e) => {
+        e.preventDefault();
+        update_bus.style.display = "none";
+
+    })
+
+    // foreach button to listen the click and perform some operation 
+    btn_bus_update_btn.forEach((btn) => {
         btn.addEventListener('click', (e) => {
-            e.preventDefault();
+            updateBtnId = btn.getAttribute('data-busId');
 
-            // pop up the form 
-            updateBtnBus.addEventListener('click', () => {
-                update_bus.style.display = "flex";
-            })
+            update_bus.style.display = "flex";
+            // Get the form data using FormData
+            // const formData = new FormData(updateForm);
 
+            // Create a data object with the updateId
+            const data = {
+                updateId: updateBtnId,
+            };
 
+            // Make the fetch POST request
+            fetch('../controller/update_form_fill.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'  
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    // Handle the response from the server (if needed)
+                    // console.log(data);
+                    if (data.success) {
+                        // Fill the form with the received data
+                        document.getElementById('bus-no').value = data.message.bus_num;
+                        document.getElementById('driver_identity').value = data.message.driver_name;
+                    } else {
+                        console.error('Error fetching bus details:', data.message);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error updating bus details:', error);
+                });
 
         })
     })

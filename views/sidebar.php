@@ -60,6 +60,12 @@
                 <span class="text">Routes</span>
             </a>
         </li>
+        <li>
+            <a href="seatPlanning.php">
+            <i class='bx bx-file-blank'></i>
+            <span class="text">Seat Planning</span>
+            </a>
+        </li>
 
     </ul>
     <ul class="side-menu">

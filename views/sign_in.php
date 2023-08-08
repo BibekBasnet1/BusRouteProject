@@ -1,5 +1,5 @@
 <!--<div class="sign-up-container">-->
-    <form action="../controller/signIn.inc.php" method="POST" class="form-form">
+    <form action="../controller/signIn.inc.php" method="POST" class="form-form" id="sign-in-form">
         <div class="title-signUP">
             <h2>Sign Up</h2>
             <div class="image wrong-image-sign-up"style="text-align: right;position: relative;top: 0;right:0">

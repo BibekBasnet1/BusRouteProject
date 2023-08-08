@@ -613,11 +613,16 @@ button.Login-button {
 
 /* style form container */
 .form-form {
-  background-color: #ffffff;
-  border-radius: 5px;
+  /* background-color: #ffffff; */
+  /* border-radius: 5px; */
   padding: 20px;
-  min-height: 100vh;
+  /* min-height: 50vh; */
   display: none;
+}
+
+#sign-in-form
+{
+  /* background-color: ; */
 }
 
 /* style title */
@@ -631,7 +636,7 @@ button.Login-button {
 .form-content {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   width: 50%;
 }
 

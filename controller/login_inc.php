@@ -1,7 +1,8 @@
 <?php
 
 // if the user press submit button for login
-if(isset($_POST['Login'])){
+if(isset($_POST['Login']))
+{
     $email = $_POST['email'];
     $roll_id = $_POST['pwd'];
     // this is for database connection
@@ -13,8 +14,6 @@ if(isset($_POST['Login'])){
 
     $login = new Login_Controller($email,$roll_id);
     $login->LoginUser();
-
-
 
 }
 
