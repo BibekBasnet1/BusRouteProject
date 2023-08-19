@@ -163,7 +163,7 @@ $count3 = $stmt3->fetchColumn();
             <h1>Send a Message</h1>
             <form id="messageForm" method="post">
                 <label for="recipient">Recipient</label>
-                <input type="text" id="recipient" name="recipient" placeholder="Enter recipient name">
+                <input type="text" id="recipient" name="recipient" placeholder="Enter recipient Id">
 
                 <label for="subject">Subject</label>
                 <input type="text" id="subject" name="subject" placeholder="Enter message subject">

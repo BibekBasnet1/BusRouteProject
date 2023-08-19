@@ -44,8 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $senderId = $_SESSION['roll_id'];
 
     // Get the recipient ID from the database based on the recipient name
-    $stmt = $db->prepare("SELECT roll_id FROM STUDENT WHERE name = :name AND user_type = 'student'");
-    $stmt->bindParam(':name', $recipient);
+    $stmt = $db->prepare("SELECT roll_id FROM STUDENT WHERE roll_id = :roll_id AND user_type = 'student'");
+    $stmt->bindParam(':roll_id', $recipient);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 

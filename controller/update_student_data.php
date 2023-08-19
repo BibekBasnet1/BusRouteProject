@@ -59,6 +59,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $locationStmt->bindParam(':rollId', $rollId);
             $locationStmt->execute();
 
+
+
+            // Check if the location's route_id is null
+            $routeIdQuery = "SELECT route_id FROM LOCATIONS WHERE location_id = :locationId";
+            $routeIdStmt = $db_connection->db_connection()->prepare($routeIdQuery);
+            $routeIdStmt->bindParam(':locationId', $locationId);
+            $routeIdStmt->execute();
+
+            $routeIdResult = $routeIdStmt->fetch(PDO::FETCH_ASSOC);
+            $locationRouteId = $routeIdResult['route_id'];
+
+            if ($locationRouteId === null) {
+                // Set the bus to null if the location's route_id is null
+                $nullBusQuery = "UPDATE STUDENT SET bus = NULL WHERE roll_id = :rollId";
+                $nullBusStmt = $db_connection->db_connection()->prepare($nullBusQuery);
+                $nullBusStmt->bindParam(':rollId', $rollId);
+                $nullBusStmt->execute();
+            }
+
             assignBusToStudent();
         } else {
             // Set the bus and location_id to null if the address doesn't exist
@@ -74,7 +93,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         ];
 
         echo $response['message'];
-
     } catch (PDOException $e) {
         $response = [
             'status' => 'error',
@@ -112,5 +130,23 @@ function assignBusToStudent()
     $stmt = $db_connection->db_connection()->prepare($sql);
     $stmt->execute();
 }
+
+// function assignBusToStudent()
+// {
+//     $db_connection = new \models\Database_Connection();
+
+//     $sql = "UPDATE STUDENT s
+//             INNER JOIN LOCATIONS l ON s.location_id = l.location_id AND s.address = l.location_name
+//             INNER JOIN ROUTES r ON l.route_id = r.route_id
+//             INNER JOIN bus b ON r.bus_id = b.bus_id
+//             SET s.bus = CASE
+//                 WHEN l.route_id IS NULL THEN NULL
+//                 WHEN l.route_id IS NOT NULL AND r.route_id IS NOT NULL THEN b.bus_num
+//                 ELSE s.bus
+//             END";
+
+//     $stmt = $db_connection->db_connection()->prepare($sql);
+//     $stmt->execute();
+// }
 
 // ... (remaining code)

@@ -60,14 +60,23 @@
                 <span class="text">Routes</span>
             </a>
         </li>
-        <li>
-            <a href="seatPlanning.php">
-            <i class='bx bx-file-blank'></i>
-            <span class="text">Seat Planning</span>
-            </a>
-        </li>
+       <li>
+        <a href="StudentAuthority.php">
+        <i class='bx bx-file-blank'></i>
+            <span class="text">StudentAuthority</span>
+        </a>
+       </li>
+
+       <li>
+        <a href="Student_Registeration.php">
+        <i class='bx bx-file-blank'></i>
+            <span class="text">Student Registeration </span>
+        </a>
+       </li>
+       
 
     </ul>
+
     <ul class="side-menu">
         <li>
             <a href="#">

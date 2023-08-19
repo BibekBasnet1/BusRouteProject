@@ -3,10 +3,10 @@ require_once "../models/Database_Connection.php";
 require_once "../views/updated_form.php";
 $db_connection = new \models\Database_Connection();
 
-if(isset($_POST['search'])){
+if (isset($_POST['search'])) {
     $search = $_POST['search'];
     $stmt = $db_connection->db_connection()->prepare("SELECT * FROM STUDENT WHERE name LIKE :search OR email LIKE :search OR address LIKE :search OR latitude LIKE :search OR longitude LIKE :search OR phone_no LIKE :search OR bus LIKE :search");
-    $stmt->bindValue(':search', '%'.$search.'%');
+    $stmt->bindValue(':search', '%' . $search . '%');
 } else {
     $stmt = $db_connection->db_connection()->prepare("SELECT * FROM STUDENT");
 }
@@ -15,7 +15,7 @@ $stmt->execute();
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <style>
-    #searchInput{
+    #searchInput {
         border: 1px solid var(--dark-grey);
         padding: 5px 5px 5px 5px;
         border-radius: 5px;
@@ -27,76 +27,73 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <h3>Student Details</h3>
             <input type="text" id="searchInput" placeholder="Search...">
             <i class="bx bx-search search-icon"></i>
-            <i class='bx bx-filter' ></i>
+            <i class='bx bx-filter'></i>
 
         </div>
         <table>
             <thead>
-            <tr>
-                <th>Name</th>
-<!--                <th>Email</th>-->
-                <th>Address</th>
-                <th>Lat</th>
-                <th>Long</th>
-                <th>Phone no</th>
-                <th>Bus No</th>
-            </tr>
+                <tr>
+                    <th>Name</th>
+                    <!--                <th>Email</th>-->
+                    <th>Address</th>
+                    <th>Lat</th>
+                    <th>Long</th>
+                    <!-- <th>Phone no</th> -->
+                    <th>Bus</th>
+                </tr>
             </thead>
             <tbody>
-            <?php
-            foreach($results as $result){
-                // Check if latitude is null and display an empty string instead
-                $latitude = $result["latitude"] ?? "";
+                <?php
+                foreach ($results as $result) {
+                    // Check if latitude is null and display an empty string instead
+                    $latitude = $result["latitude"] ?? "";
 
-                // Check if longitude is null and display an empty string instead
-                $longitude = $result["longitude"] ?? "";
+                    // Check if longitude is null and display an empty string instead
+                    $longitude = $result["longitude"] ?? "";
                 ?>
-                <tr>
-                    <td>
-                        <img src="img/people.png">
-                        <p><?php echo $result['name']; ?></p>
-                    </td>
-<!--                    <td>-->
-<!--                        --><?php //echo $result['email']; ?>
-<!--                    </td>-->
-                    <td>
-                        <?php echo $result["address"]; ?>
-                    </td>
-                    <td>
-                        <?php echo $latitude;
-                        ?>
-                    </td>
-                    <td>
-                        <?php echo $longitude; ?>
-                    </td>
-                    <td>
-                        <?php echo $result["phone_no"]; ?>
-                    </td>
-                    <td>
-                        <?php
-                        echo $result["bus"];
-                        ?>
-                    </td>
-                    <td>
-                        <?php
-                        $rollId = $result['roll_id'];
-                        ?>
+                    <tr>
+                        <td>
+                            <img src="img/people.png">
+                            <p><?php echo $result['name']; ?></p>
+                        </td>
+                     
+                        <td>
+                            <?php echo $result["address"]; ?>
+                        </td>
+                        <td>
+                            <?php echo $latitude;
+                            ?>
+                        </td>
+                        <td>
+                            <?php echo $longitude; ?>
+                        </td>
 
-                        <button type="button" class="edit-btn" data-rollid="<?php echo $rollId; ?>" data-usertype="<?php echo $result['user_type']; ?>">Update</button>
+                        <td>
+                            <?php
+                            echo $result["bus"];
+                            ?>
+                        </td>
+                        <td>
 
-                    </td>
+                        <td>
+                            <?php
+                            $rollId = $result['roll_id'];
+                            ?>
 
-                    <td>
+                            <button type="button" class="edit-btn" data-rollid="<?php echo $rollId; ?>" data-usertype="<?php echo $result['user_type']; ?>">Update</button>
+
+                        </td>
+
+                        <td>
                             <button type="submit" class="delete-btn" name="delete_id" data-rollid="<?php echo $result['roll_id']; ?>" data-usertype="<?php echo $result['user_type']; ?>">Delete</button>
-                    </td>
-                </tr>
-            <?php } ?>
+                        </td>
+                    </tr>
+                <?php } ?>
             </tbody>
         </table>
     </div>
 </div>
 <script>
-
     // to prefill the form based on the update button clicked and send the request to the server
     let formElement = document.querySelector(".sign-up-container");
     let updateBtns = document.querySelectorAll(".edit-btn");
@@ -188,14 +185,14 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             let confirmDelete = confirm("Are you sure you want to delete this student?");
 
             // Create an AJAX request to delete the record
-            if(confirmDelete) {
+            if (confirmDelete) {
 
                 let xhr = new XMLHttpRequest();
                 xhr.open("POST", "../controller/On_delete_record.php", true);
                 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
                 // Handle the response
-                xhr.onload = function () {
+                xhr.onload = function() {
                     if (xhr.status === 200) {
                         let response = JSON.parse(xhr.responseText);
                         if (response.status === "success") {
@@ -270,7 +267,4 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         // Send the request with the search term
         xhr.send('search=' + searchInput);
     });
-
-
-
 </script>

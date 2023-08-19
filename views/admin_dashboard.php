@@ -33,7 +33,6 @@ while ($row = $buses->fetch(PDO::FETCH_ASSOC)) {
     $busIds[] = $row['bus_num'];
 }
 
-
 ?>
 <!DOCTYPE html>
 
@@ -61,7 +60,7 @@ while ($row = $buses->fetch(PDO::FETCH_ASSOC)) {
             overflow-x: hidden;
         }
     </style>
-    <!-- <link href="toastr.css" rel="stylesheet"/> -->
+  
 </head>
 
 <body>
@@ -140,7 +139,7 @@ while ($row = $buses->fetch(PDO::FETCH_ASSOC)) {
     <!-- CONTENT -->
 
     <script src="../resources/dash_code.js"></script>
-    <!-- <script src="toastr.js"></script> -->
+  
 </body>
 
 </html>

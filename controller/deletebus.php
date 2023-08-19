@@ -16,21 +16,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
         // var_dump($deleteId);
 
-        // to set the student bus number to null
-        $query = $db_connection->db_connection()->prepare("UPDATE STUDENT SET bus = NULL WHERE bus = $deleteId");
-        // $query->bindValue(':bus',$deleteId);
-        $query->execute();
- 
-        // setting route bus_id to null
-        $route = $db_connection->db_connection()->prepare("UPDATE ROUTES SET bus_id = NULL WHERE bus_id = :bus_id");
-        $route->bindValue(':bus_id',$deleteId);
-        $route->execute();
+        $routeId = $db_connection->db_connection()->prepare("SELECT route_id FROM ROUTES WHERE bus_id = :bus_id"); 
+        $routeId->bindValue(':bus_id', $deleteId);
+        $routeId->execute();
 
-        // deleteing the record bus
-        $stmt = $db_connection->db_connection()->prepare("DELETE FROM bus WHERE bus_id = :bus_id");
-        $stmt->bindValue(':bus_id', $deleteId);
-        $stmt->execute();
-        
+        $routeId->fetch(PDO::FETCH_ASSOC);
+        $id = 0;
+        foreach($routeId as $route)
+        {
+            $id = $route;
+        }
+
+        // to delete the locations from the location table using routeId 
+        $locationDelete = $db_connection->db_connection()->prepare("DELETE FROM LOCATIONS WHERE route_id = :route_id");
+        $deleteRoutesQuery->bindValue(':route_id', $id);
+        $deleteRoutesQuery->execute();
+
+        // Delete routes associated with the bus
+        $deleteRoutesQuery = $db_connection->db_connection()->prepare("DELETE FROM ROUTES WHERE bus_id = :bus_id");
+        $deleteRoutesQuery->bindValue(':bus_id', $deleteId);
+        $deleteRoutesQuery->execute();
+
+
+        // Delete the bus record itself
+        $deleteBusQuery = $db_connection->db_connection()->prepare("DELETE FROM bus WHERE bus_id = :bus_id");
+        $deleteBusQuery->bindValue(':bus_id', $deleteId);
+        $deleteBusQuery->execute();
+
+        // Delete related student bus assignments if needed
+        $deleteStudentQuery = $db_connection->db_connection()->prepare("UPDATE STUDENT SET bus = NULL WHERE bus = :bus_id");
+        $deleteStudentQuery->bindValue(':bus_id', $deleteId);
+        $deleteStudentQuery->execute();
         
     
         // echo "Affected rows: " . $stmt->rowCount(); // Debugging statement

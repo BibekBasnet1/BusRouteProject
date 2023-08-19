@@ -39,9 +39,8 @@ $bus_numbers =  $bus_num->fetchAll(PDO::FETCH_ASSOC);
 // dd($buses);
 
 $busNumbers  = [];
-foreach ($bus_numbers as $bus_num)
-{
-    array_push($busNumbers,$bus_num['bus_num']);
+foreach ($bus_numbers as $bus_num) {
+    array_push($busNumbers, $bus_num['bus_num']);
 }
 
 ?>
@@ -196,11 +195,13 @@ include_once "sidebar.php";
                 </div>
                 <table>
                     <thead>
+
                         <tr>
                             <th>Route Name</th>
-                            <th>Bus Num</th>
+                            <th>RouteLocations</th>
                             <th>Action</th>
                         </tr>
+
                     </thead>
                     <?php foreach ($results as $result) {
                     ?>
@@ -212,21 +213,25 @@ include_once "sidebar.php";
                                 </td>
 
 
-
-                                    
-                                    <!-- <?php foreach ($busNumbers as $bus_num) {?>
-                                        <td>
-                                        <?php echo  $bus_num; ?>
-                                        </td>
-
-                                    <?php } ?>
-                                     -->
-                                        
-
                                 <td>
-                                    <button type="submit" class="update_route" data-routeId="<?php echo $result['route_id'];  ?> ">
-                                        Update
-                                    </button>
+                                    <?php
+                                    // Fetch associated locations for the current route using INNER JOIN
+                                    $route_id = $result['route_id'];
+                                    $stmt = $db_connection->db_connection()->prepare("
+                                        SELECT location_name 
+                                            FROM LOCATIONS
+                                        INNER JOIN ROUTES ON LOCATIONS.route_id = ROUTES.route_id
+                                        WHERE ROUTES.route_id = :route_id
+                                    "); 
+                                    $stmt->bindValue(':route_id', $route_id, PDO::PARAM_INT);
+                                    $stmt->execute();
+                                    $locations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                                    // Display the associated locations
+                                    foreach ($locations as $location) {
+                                        echo $location['location_name'] . '<br>';
+                                    }
+                                    ?>
                                 </td>
 
                                 <td>

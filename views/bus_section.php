@@ -188,6 +188,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <table>
                         <thead>
                             <tr>
+                                <!-- <th>Bus Id</th> -->
                                 <th>Bus Number</th>
                                 <th>Driver Name</th>
                                 <th>Action</th>
@@ -202,9 +203,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 $count++;
                             ?>
                                 <tr>
-                                    <!-- <td> -->
-
-                                    <!-- </td> -->
+                                    
                                     <td>
                                         <?php echo $result['bus_num']  ?>
                                     </td>
@@ -217,7 +216,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                                     <td>
 
-                                        <button type="button" class="btn_bus_update_btn" id="data-busId" data-busId="<?php echo $result['bus_id']; ?>">Update</button>
+                                        <!-- <button type="button" class="btn_bus_update_btn" id="data-busId" data-busId="<?php echo $result['bus_id']; ?>">Update</button> -->
 
                                     </td>
 

@@ -1,6 +1,7 @@
 <?php
 //session_start();
 require_once "Login_Database_Query.php";
+include "ToastrNotificatoin.php";
 
 class Login_Controller extends Login_Database_Query
 {
@@ -19,7 +20,9 @@ class Login_Controller extends Login_Database_Query
     public function loginUser(): void
     {
         if(!$this->checkInvalidEmail() || !$this->checkValidRollNo() || !$this->checkEmptyInput()){
+            // ToastrNotification::displayError('Invalid Login credential');
             header("Location: ../views/index.php?error=invalidEmailOrRollNoOrEmptyInput");
+            // echo "<script> alert('Something went wrong'); </script>";
             exit();
         }
         $this->getUser($this->email,$this->roll_id);

@@ -1,6 +1,6 @@
 <?php
 require_once('sign_database_query.php');
-
+include "ToastrNotification.php";
 class SignIn_Control extends sign_database_query
 {
     private $name;
@@ -30,16 +30,17 @@ class SignIn_Control extends sign_database_query
     public function signUpUser(): void
     {
         // this is to help if the input user has given is empty
-        if(!$this->emptyInput()){
+        if(!$this->emptyInput())
+        {
             header("Location: ../views/index.php?error=emptyInput");
             
-//            var_dump($this->email,$this->address,$this->relationship,$this->name,$this->phone_no,$this->parents_name,$this->roll_id,$this->parent_no);
             exit();
         }
 
         // this is to help if the email user has given is invalid
         if(!$this->checkInvalidEmail()){
             header("Location: ../views/index.php?error=invalidEmail");
+            // ToastrNotification::displayError('The input cannot be empty!');
             exit();
         }
         // this is to check if the username,parent's name,relationship is in proper format i.e all should be in string

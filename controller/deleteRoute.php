@@ -9,8 +9,14 @@ if (isset($_POST["route_id"])) {
         $route_id = $_POST['route_id'];
 
         // to set null value on the location table 
+        
         $locationTableRoute = $db_connection->db_connection()->prepare("UPDATE LOCATIONS SET route_id = NULL WHERE route_id =:route_id"); 
         $locationTableRoute->bindValue(':route_id',$route_id);
+        $locationTableRoute->execute();
+
+        
+        $deleteLocationRoute = $db_connection->db_connection()->prepare("DELETE from LOCATIONS WHERE route_id =:route_id"); 
+        $deleteLocationRoute->bindValue(':route_id',$route_id);
         $locationTableRoute->execute();
 
         // set null value for the student table too 
