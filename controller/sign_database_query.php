@@ -8,17 +8,21 @@ class sign_database_query extends \models\Database_Connection {
      */
     protected function setUpUser($name, $parents_name, $phone_no, $relationship, $email, $roll_id, $parent_no, $address): void
     {
+
+        // checks if the user exists in the database
         if ($this->checkUserInDatabase($email, $roll_id)) {
-            // user already exists
+            
             header("Location: ../views/index.php?error=UserExist");
             exit();
         }
+
 
         if(!$this->checkUserAuthority($roll_id))
         {
             header("Location: ../views/index.php?error=UserNotVerfied");
             exit();
         }
+        
 
         $stmt = $this->db_connection()->prepare("INSERT INTO STUDENT (name, parents_name, phone_no, relationship, email, roll_id, parent_no, address,user_type) 
     VALUES(:name, :parents_name, :phone_no, :relationship, :email, :roll_id, :parent_no, :address,'student')");
@@ -67,8 +71,4 @@ class sign_database_query extends \models\Database_Connection {
 
 }
 ?>
-<script>
-    const userSetUp = document.querySelector(".userSetUpFailed");
-    // toastr.warning(userSetUp.textContent);
 
-</script>

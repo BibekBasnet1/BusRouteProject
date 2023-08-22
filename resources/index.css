@@ -61,7 +61,7 @@ ul.nav-links {
   min-height: 10vh;
   width: 100%;
   align-items: center;
-  /*background-color: var(--nav-color);*/
+  background-color: var(--primary-color);
   justify-content: space-around;
   flex-wrap: wrap;
 }
@@ -78,7 +78,7 @@ ul.nav-links {
   right: 0;
   width: 100%;
   height: 100%;
-  background: var(--dark);
+  /* background: var(--primary-color); */
   display: grid;
   grid-template-rows: auto 1fr auto;
   row-gap: 1rem;
@@ -89,6 +89,7 @@ ul.nav-links {
   transform: translate(0);
   width: 400px;
 }
+
 .sidebar-header {
   display: flex;
   justify-content: space-between;
@@ -962,7 +963,7 @@ svg {
 
 
   /* start of the feature section */
-.features {
+  .features {
     min-height: 40vh;
   }
   

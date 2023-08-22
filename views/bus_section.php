@@ -24,7 +24,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- My CSS -->
     <link rel="stylesheet" href="../resources/dash.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
     <title>Admin</title>
     <style>
         #sidebar .side-menu li a {
@@ -45,18 +45,17 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             justify-content: center;
             margin-top: 4rem;
 
-            
+
         }
 
-        .btn_bus_update_btn
-        {
+        .btn_bus_update_btn {
             font-size: 1rem;
             padding: 0.5em 1em;
             border: transparent;
             box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
             background: var(--blue);
             color: white;
-            border-radius: 4px;      
+            border-radius: 4px;
         }
 
         .delete-bus {
@@ -203,7 +202,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 $count++;
                             ?>
                                 <tr>
-                                    
+
                                     <td>
                                         <?php echo $result['bus_num']  ?>
                                     </td>
@@ -298,6 +297,19 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </main>
     </section>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+    // Check if there's an error parameter in the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const errorParam = urlParams.get('error');
+    // Remove the error parameter from the URL
+    const newUrl = window.location.href.split('?')[0];
+    history.pushState({}, document.title, newUrl);
+    if (errorParam) {
+
+        toastr.info(errorParam);
+    }
+</script>
 <script>
     const delteBusInfo = document.querySelectorAll('.delete-bus');
 
@@ -394,7 +406,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             fetch('../controller/update_form_fill.php', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'  
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(data),
                 })

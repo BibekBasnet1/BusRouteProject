@@ -42,6 +42,7 @@ $routeResult = $routeNumbers->fetchAll(PDO::FETCH_ASSOC);
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- My CSS -->
     <link rel="stylesheet" href="../resources/dash.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 
     <title>Admin</title>
     <style>
@@ -355,6 +356,9 @@ $routeResult = $routeNumbers->fetchAll(PDO::FETCH_ASSOC);
     <!-- CONTENT -->
 
     <script src="../resources/dash_code.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 </body>
 
 </html>
@@ -365,9 +369,10 @@ $routeResult = $routeNumbers->fetchAll(PDO::FETCH_ASSOC);
     const locationFormContainer = document.querySelector('.location_update_form_container');
     // const contentSection = document.querySelector('#content');
 
-    addLocation.addEventListener('click', () => {
+    addLocation.addEventListener('click', () => 
+    {
         locationFormContainer.style.display = 'flex';
-        // contentSection.classList.add('blur');
+
 
     });
 
@@ -431,6 +436,17 @@ $routeResult = $routeNumbers->fetchAll(PDO::FETCH_ASSOC);
             xhr.send(params);
         }
     }
+
+      // Check if there's an error parameter in the URL
+      const urlParams = new URLSearchParams(window.location.search);
+            const errorParam = urlParams.get('error');
+            // Remove the error parameter from the URL
+            const newUrl = window.location.href.split('?')[0];
+            history.pushState({}, document.title, newUrl);
+            if (errorParam) {
+
+                toastr.info(errorParam);
+            }
 
     document.getElementById("sort-icon").addEventListener("click", function() {
         // Send AJAX request
@@ -497,9 +513,9 @@ $routeResult = $routeNumbers->fetchAll(PDO::FETCH_ASSOC);
         updateBtn.addEventListener('click', (e) => {
             e.preventDefault();
             let btnAttribute = updateBtn.getAttribute('data-locationid');
-            // console.log("clicked " + btnAttribute);
 
             updateLocation.style.display = "flex";
+
             // Create a data object with the updateId
             const data = {
                 updateId: btnAttribute,
@@ -529,9 +545,6 @@ $routeResult = $routeNumbers->fetchAll(PDO::FETCH_ASSOC);
                 .catch((error) => {
                     console.error('Error updating bus details:', error);
                 });
-
-
-
 
         });
     });

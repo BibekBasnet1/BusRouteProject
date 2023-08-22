@@ -95,6 +95,18 @@ class Login_Database_Query extends \models\Database_Connection
 
     public function getUser($email, $roll_id): void
     {
+
+        // check if the student is registered in the user registeration table 
+
+        $isRegistered = $this->checkUserInRegisteration($roll_id);
+
+        // if the user is not registered redirect them to the home page 
+        if(!$isRegistered){
+            header("Location: ../views/index.php?error=User Not Registered");
+            exit();
+        }
+
+
         // Check if the user is an admin
         $isAdmin = $this->checkAdmin($roll_id);
 
@@ -133,10 +145,25 @@ class Login_Database_Query extends \models\Database_Connection
         $query->execute([$email,$roll_id]);
         $userData = $query->fetch(PDO::FETCH_ASSOC);
 
+        // if the user exists but the verification is 1 then only execute it 
         if ($userData && $userData["verification"] == 1 && $userData["roll_id"] == $roll_id) {
             return true;
         }
 
+        // if the verification status is not 1 then  it will return false admin needs to verify it 
         return false;
     }
+
+
+    private function checkUserInRegisteration($roll_id)
+    {
+        $query = $this->db_connection()->prepare("SELECT symbolNo from User_Registration where symbolNo = ?");
+        $query->execute([$roll_id]);
+        $userAuthenticity = $query->fetch(PDO::FETCH_ASSOC);
+        if($userAuthenticity)
+            return true;
+        
+
+    }
+
 }
